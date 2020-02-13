@@ -1,32 +1,81 @@
 package com.company;
 
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class EditorWindow extends JFrame {
 
-    private final BorderLayout layout;
-
     private JScrollPane scrollPane;
     private JTextArea textArea;
 
     private JToolBar toolBar;
-    private JButton toolbarButton1, toolbarButton2, toolbarButton3;
 
     private JMenuBar menuBar;
-    private JMenuItem menuFile, menuEdit, menuView, menuHelp;
+
+    private JLabel wordCount, lineColumn, zoomLevel, charSet;
 
     public EditorWindow() {
 
         super("Jet Editor");
 
-        layout = new BorderLayout(50, 0);
+        BorderLayout layout = new BorderLayout(50, 0);
         setLayout(layout);
 
-        //Setup menubar and menu buttons for menubar
-        menuFile = new JMenuItem("File");
+        //Initialize the menu bar
+        initMenuBar();
+
+        add(menuBar);
+        setJMenuBar(menuBar);
+
+        //Initialize the tool bar
+        initToolbar();
+
+        add(toolBar, BorderLayout.NORTH);
+
+        //Add status bar to bottom of the window
+        JPanel statusBar = new JPanel();
+        statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.LINE_AXIS));
+
+        wordCount = new JLabel(" Words: x \t Chars: x ");
+        lineColumn = new JLabel(" Ln: x \t Col: x ");
+        zoomLevel = new JLabel(" 100% ");
+        charSet = new JLabel(" UTF-8 ");
+
+        statusBar.add(wordCount);
+        statusBar.add(Box.createHorizontalGlue());
+        statusBar.add(lineColumn);
+        statusBar.add(Box.createRigidArea(new Dimension(20, 0)));
+        statusBar.add(zoomLevel);
+        statusBar.add(Box.createRigidArea(new Dimension(20, 0)));
+        statusBar.add(charSet);
+
+        add(statusBar, BorderLayout.SOUTH);
+
+        //Initialise the text area
+        initTextArea();
+
+        //Initialise the scroll area
+        initScrollPane();
+
+        //Add two empty JPanels to the east and west to provide padding to the edges of the TextArea
+//        add(new JPanel(), BorderLayout.WEST);
+//        add(new JPanel(), BorderLayout.EAST);
+
+        add(scrollPane, BorderLayout.CENTER);
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {
+        }
+        SwingUtilities.updateComponentTreeUI(this);
+
+        pack();
+
+    }
+
+    private void initToolbar() {
+
+        JButton toolbarButton1, toolbarButton2, toolbarButton3;
 
         //Setup toolbar and buttons for toolbar
         toolbarButton1 = new JButton("Button 1");
@@ -37,31 +86,72 @@ public class EditorWindow extends JFrame {
         toolBar.add(toolbarButton1);
         toolBar.add(toolbarButton2);
         toolBar.add(toolbarButton3);
+    }
 
-        add(toolBar, BorderLayout.NORTH);
+    private void initMenuBar() {
 
-        JButton button = new JButton("TestButton");
-        add(button, layout.SOUTH);
+        JMenu menuFile, menuEdit, menuFormat, menuView, menuHelp;
+        JMenuItem fileNew, fileSave, fileOpen, fileExit;
+        JMenuItem editCopy, editPaste, editFind, editReplace;
+        JMenuItem formatWordWrap, formatFont;
+        JMenuItem viewZoom;
+        JMenuItem helpHelp;
 
-        //Initialise the text area
-        initTextArea();
+        JSeparator fileSeparator1, editSeparator1;
 
-        //Initialise the scroll area
-        initScrollPane();
+        //Setup menus and menu buttons for a menubar
+        menuBar = new JMenuBar();
 
-        //Add two empty JPanels to the east and west to provide padding to the edges of the TextArea
-        add(new JPanel(), BorderLayout.WEST);
-        add(new JPanel(), BorderLayout.EAST);
+        menuFile = new JMenu("File");
+        menuEdit = new JMenu("Edit");
+        menuFormat = new JMenu("Format");
+        menuView = new JMenu("View");
+        menuHelp = new JMenu("Help");
 
-        add(scrollPane, layout.CENTER);
+        fileNew = new JMenuItem("New");
+        fileSave = new JMenuItem("Save");
+        fileOpen = new JMenuItem("Open");
+        fileExit = new JMenuItem("Exit");
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) { }
-        SwingUtilities.updateComponentTreeUI(this);
+        editCopy = new JMenuItem("Copy");
+        editPaste = new JMenuItem("Paste");
+        editFind = new JMenuItem("Find");
+        editReplace = new JMenuItem("Replace");
 
+        formatWordWrap = new JMenuItem("Word Wrap");
+        formatFont = new JMenuItem("Font...");
 
-        pack();
+        viewZoom = new JMenuItem("Zoom");
+
+        helpHelp = new JMenuItem("Help");
+
+        fileSeparator1 = new JSeparator();
+        editSeparator1 = new JSeparator();
+
+        menuFile.add(fileNew);
+        menuFile.add(fileSave);
+        menuFile.add(fileOpen);
+        menuFile.add(fileSeparator1);
+        menuFile.add(fileExit);
+
+        menuEdit.add(editCopy);
+        menuEdit.add(editPaste);
+        menuEdit.add(editSeparator1);
+        menuEdit.add(editFind);
+        menuEdit.add(editReplace);
+
+        menuFormat.add(formatWordWrap);
+        menuFormat.add(formatFont);
+
+        menuView.add(viewZoom);
+
+        menuHelp.add(helpHelp);
+
+        menuBar.add(menuFile);
+        menuBar.add(menuEdit);
+        menuBar.add(menuFormat);
+        menuBar.add(menuView);
+        menuBar.add(menuHelp);
 
     }
 
@@ -72,7 +162,7 @@ public class EditorWindow extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        scrollPane.setPreferredSize(new Dimension(800, 800));
+        scrollPane.setPreferredSize(new Dimension(1000, 550));
 
     }
 
