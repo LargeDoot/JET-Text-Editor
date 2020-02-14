@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="13">
+      <module name="JET-Text-Editor" target="8" />
+    </bytecodeTargetLevel>
+  </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="JET-Text-Editor" options="--add-exports=java.desktop/com.sun.java.swing.plaf.windows=ALL-UNNAMED" />
+      <module name="JET-Text-Editor" options="" />
     </option>
   </component>
 </project>

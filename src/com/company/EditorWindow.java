@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class EditorWindow extends JFrame {
 
+    ImageIcon jetIcon;
+
     private JScrollPane scrollPane;
     private JTextArea textArea;
 
@@ -17,6 +19,9 @@ public class EditorWindow extends JFrame {
     public EditorWindow() {
 
         super("Jet Editor");
+
+        jetIcon = new ImageIcon("C:\\Users\\Ethan\\OneDrive - Office 365\\Week 3 - wc 13.01.2020\\Assignment\\JET Logo.png");
+        setIconImage(jetIcon.getImage());
 
         BorderLayout layout = new BorderLayout(50, 0);
         setLayout(layout);
@@ -68,6 +73,8 @@ public class EditorWindow extends JFrame {
         } catch (Exception ignored) {
         }
         SwingUtilities.updateComponentTreeUI(this);
+
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         pack();
 

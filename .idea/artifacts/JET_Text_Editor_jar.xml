@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JET-Text-Editor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JET_Text_Editor_jar</output-path>
+    <root id="archive" name="JET-Text-Editor.jar">
+      <element id="module-output" name="JET-Text-Editor" />
+    </root>
+  </artifact>
+</component>
