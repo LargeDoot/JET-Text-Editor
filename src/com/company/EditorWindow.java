@@ -16,6 +16,8 @@ public class EditorWindow extends JFrame {
 
     private JLabel wordCount, lineColumn, zoomLevel, charSet;
 
+    private String currentWorkingDirectory;
+
     public EditorWindow() {
 
         super("Jet Editor");
@@ -122,6 +124,7 @@ public class EditorWindow extends JFrame {
 
         fileOpen.addActionListener(new fileOpenListener(this));
         fileSaveAs.addActionListener(new fileSaveAsListener(this));
+        fileExit.addActionListener(new fileExitListener(this));
 
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");
@@ -182,17 +185,25 @@ public class EditorWindow extends JFrame {
         textArea.setLineWrap(true);
     }
 
-    void setText(String text) {
-
-        textArea.setText(text);
-
-    }
-
-    String getText() {
+    public String getText() {
 
         return textArea.getText();
 
     }
 
+    public void setText(String text) {
 
+        textArea.setText(text);
+
+    }
+
+    public String getCurrentWorkingDirectory() {
+
+        return currentWorkingDirectory;
+    }
+
+    public void setCurrentWorkingDirectory(String currentWorkingDirectory) {
+
+        this.currentWorkingDirectory = currentWorkingDirectory;
+    }
 }

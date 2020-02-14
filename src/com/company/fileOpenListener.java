@@ -19,8 +19,11 @@ public class fileOpenListener extends JFrame implements ActionListener {
 
         System.out.println("File > Open");
 
-        new ReaderWriter(new FileBrowser().getURI(), editorWindow);
+        String readLocation = new FileBrowser().getURI();
+        new ReaderWriter(readLocation, editorWindow);
 
+        editorWindow.setCurrentWorkingDirectory(readLocation);
+        editorWindow.setTitle(String.format("JET \t | \t %s", readLocation));
 
     }
 
