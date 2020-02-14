@@ -8,7 +8,7 @@ public class ReaderWriter {
     EditorWindow editorWindow;
 
     //Writer constructor
-    public ReaderWriter(String pText, String pURI) {
+    public ReaderWriter(String pURI, String pText) {
 
         writeToURI = pURI;
         writeToText = pText;
@@ -56,12 +56,23 @@ public class ReaderWriter {
 
         String nextLine;
         StringBuilder readString = new StringBuilder("");
-        BufferedReader br = new BufferedReader(new FileReader(writeToURI));
 
-        while ((nextLine = br.readLine()) != null) {
+        BufferedReader br = null;
 
-            readString.append(nextLine);
-            readString.append("\n");
+        //Try to read - null URI will throw error
+        try {
+
+            br = new BufferedReader(new FileReader(writeToURI));
+
+            while ((nextLine = br.readLine()) != null) {
+
+                readString.append(nextLine);
+                readString.append("\n");
+
+            }
+        } catch (NullPointerException e) {
+
+            System.err.println("User cancelled open operation.");
         }
 
         editorWindow.setText(readString.toString());

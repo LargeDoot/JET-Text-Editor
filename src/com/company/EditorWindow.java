@@ -98,7 +98,7 @@ public class EditorWindow extends JFrame {
     private void initMenuBar() {
 
         JMenu menuFile, menuEdit, menuFormat, menuView, menuHelp;
-        JMenuItem fileNew, fileSave, fileOpen, fileExit;
+        JMenuItem fileNew, fileSaveAs, fileOpen, fileExit;
         JMenuItem editCopy, editPaste, editFind, editReplace;
         JMenuItem formatWordWrap, formatFont;
         JMenuItem viewZoom;
@@ -116,11 +116,12 @@ public class EditorWindow extends JFrame {
         menuHelp = new JMenu("Help");
 
         fileNew = new JMenuItem("New");
-        fileSave = new JMenuItem("Save");
+        fileSaveAs = new JMenuItem("Save As");
         fileOpen = new JMenuItem("Open");
         fileExit = new JMenuItem("Exit");
 
         fileOpen.addActionListener(new fileOpenListener(this));
+        fileSaveAs.addActionListener(new fileSaveAsListener(this));
 
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");
@@ -138,7 +139,7 @@ public class EditorWindow extends JFrame {
         editSeparator1 = new JSeparator();
 
         menuFile.add(fileNew);
-        menuFile.add(fileSave);
+        menuFile.add(fileSaveAs);
         menuFile.add(fileOpen);
         menuFile.add(fileSeparator1);
         menuFile.add(fileExit);
@@ -184,6 +185,12 @@ public class EditorWindow extends JFrame {
     void setText(String text) {
 
         textArea.setText(text);
+
+    }
+
+    String getText() {
+
+        return textArea.getText();
 
     }
 
