@@ -120,6 +120,8 @@ public class EditorWindow extends JFrame {
         fileOpen = new JMenuItem("Open");
         fileExit = new JMenuItem("Exit");
 
+        fileOpen.addActionListener(new fileOpenListener());
+
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");
         editFind = new JMenuItem("Find");
