@@ -120,7 +120,7 @@ public class EditorWindow extends JFrame {
         fileOpen = new JMenuItem("Open");
         fileExit = new JMenuItem("Exit");
 
-        fileOpen.addActionListener(new fileOpenListener());
+        fileOpen.addActionListener(new fileOpenListener(this));
 
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");
@@ -181,6 +181,11 @@ public class EditorWindow extends JFrame {
         textArea.setLineWrap(true);
     }
 
+    void setText(String text) {
+
+        textArea.setText(text);
+
+    }
 
 
 }

@@ -5,42 +5,37 @@ import java.io.*;
 public class ReaderWriter {
 
     String writeToURI, writeToText;
+    EditorWindow editorWindow;
 
     //Writer constructor
-    public boolean ReaderWriter(String pText, String pURI) {
-
-        boolean writeSuccess = false;
+    public ReaderWriter(String pText, String pURI) {
 
         writeToURI = pURI;
         writeToText = pText;
 
         try {
             writeFile();
-            writeSuccess = true;
+            System.out.printf("Write to location %s successful!", writeToURI);
         } catch (IOException e) {
             System.err.printf("Write to location %s failed!", writeToURI);
         }
 
-        return writeSuccess;
 
     }
 
     //Reader constructor
-    public String ReaderWriter(String pURI) {
+    public ReaderWriter(String pURI, EditorWindow editorWindow) {
 
-        String output;
+        this.editorWindow = editorWindow;
 
         writeToURI = pURI;
 
         try {
-            output = fileReader();
+            fileReader();
         } catch (IOException e) {
 
             System.err.printf("File read at %s failed!", writeToURI);
-            output = null;
         }
-        return output;
-
 
     }
 
@@ -57,17 +52,19 @@ public class ReaderWriter {
     }
 
     //File reader
-    private String fileReader() throws IOException {
+    private void fileReader() throws IOException {
 
-        String nextLine, readString = null;
+        String nextLine;
+        StringBuilder readString = new StringBuilder("");
         BufferedReader br = new BufferedReader(new FileReader(writeToURI));
 
         while ((nextLine = br.readLine()) != null) {
 
-            readString += nextLine;
+            readString.append(nextLine);
+            readString.append("\n");
         }
 
-        return readString;
+        editorWindow.setText(readString.toString());
 
     }
 

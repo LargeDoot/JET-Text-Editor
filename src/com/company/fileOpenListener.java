@@ -6,11 +6,21 @@ import java.awt.event.ActionListener;
 
 public class fileOpenListener extends JFrame implements ActionListener {
 
+    EditorWindow editorWindow;
+
+    public fileOpenListener(EditorWindow editorWindow) {
+
+        this.editorWindow = editorWindow;
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        System.err.println("The File>Open button was clicked!!");
+        System.out.println("File > Open");
+
+        new ReaderWriter(new FileBrowser().getURI(), editorWindow);
+
 
     }
 
