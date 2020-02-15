@@ -22,8 +22,11 @@ public class EditorWindow extends JFrame {
 
         super("Jet Editor");
 
-        jetIcon = new ImageIcon("C:\\Users\\Ethan\\OneDrive - Office 365\\Week 3 - wc 13.01.2020\\Assignment\\JET Logo.png");
+        jetIcon = new ImageIcon("images/JET Logo.png");
         setIconImage(jetIcon.getImage());
+
+        System.out.println("Working Directory = " +
+                System.getProperty("user.dir"));
 
         BorderLayout layout = new BorderLayout(50, 0);
         setLayout(layout);
