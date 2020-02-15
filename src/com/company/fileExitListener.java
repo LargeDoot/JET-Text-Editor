@@ -5,13 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class fileExitListener extends JFrame implements ActionListener {
+
+    EditorWindow window;
+
     public fileExitListener(EditorWindow editorWindow) {
+
+        this.window = editorWindow;
+
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        System.exit(0);
+        window.dispose();
 
     }
 }

@@ -18,6 +18,8 @@ public class EditorWindow extends JFrame {
 
     private String currentWorkingDirectory;
 
+    private JETFile currentFile;
+
     public EditorWindow() {
 
         super("Jet Editor");
@@ -79,7 +81,7 @@ public class EditorWindow extends JFrame {
         }
         SwingUtilities.updateComponentTreeUI(this);
 
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         pack();
 
@@ -103,7 +105,7 @@ public class EditorWindow extends JFrame {
     private void initMenuBar() {
 
         JMenu menuFile, menuEdit, menuFormat, menuView, menuHelp;
-        JMenuItem fileNew, fileSaveAs, fileOpen, fileExit;
+        JMenuItem fileNew, fileSave, fileSaveAs, fileOpen, fileExit;
         JMenuItem editCopy, editPaste, editFind, editReplace;
         JMenuItem formatWordWrap, formatFont;
         JMenuItem viewZoom;
@@ -121,12 +123,15 @@ public class EditorWindow extends JFrame {
         menuHelp = new JMenu("Help");
 
         fileNew = new JMenuItem("New");
+        fileSave = new JMenuItem("Save");
         fileSaveAs = new JMenuItem("Save As");
         fileOpen = new JMenuItem("Open");
         fileExit = new JMenuItem("Exit");
 
+        fileNew.addActionListener(new fileNewListener(this));
         fileOpen.addActionListener(new fileOpenListener(this));
-        fileSaveAs.addActionListener(new fileSaveAsListener(this));
+        fileSaveAs.addActionListener(new fileSaveAsListener(currentFile));
+        fileSaveAs.addActionListener(new fileSaveAsListener(currentFile));
         fileExit.addActionListener(new fileExitListener(this));
 
         editCopy = new JMenuItem("Copy");
@@ -145,6 +150,7 @@ public class EditorWindow extends JFrame {
         editSeparator1 = new JSeparator();
 
         menuFile.add(fileNew);
+        menuFile.add(fileSave);
         menuFile.add(fileSaveAs);
         menuFile.add(fileOpen);
         menuFile.add(fileSeparator1);
@@ -194,9 +200,9 @@ public class EditorWindow extends JFrame {
 
     }
 
-    public void setText(String text) {
+    public void setFile(JETFile file) {
 
-        textArea.setText(text);
+        currentFile = file;
 
     }
 

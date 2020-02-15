@@ -8,10 +8,10 @@ public class ReaderWriter {
     EditorWindow editorWindow;
 
     //Writer constructor
-    public ReaderWriter(String pURI, String pText) {
+    public ReaderWriter(JETFile fileToWrite) {
 
-        writeToURI = pURI;
-        writeToText = pText;
+        writeToURI = fileToWrite.getFileLocation();
+        writeToText = fileToWrite.getTextContents();
 
         try {
             writeFile();
@@ -65,20 +65,19 @@ public class ReaderWriter {
             br = new BufferedReader(new FileReader(writeToURI));
 
             while ((nextLine = br.readLine()) != null) {
-
                 readString.append(nextLine);
                 readString.append("\n");
-
             }
 
             br.close();
 
         } catch (NullPointerException e) {
-
             System.err.println("User cancelled open operation.");
         }
 
-        editorWindow.setText(readString.toString());
+        JETFile createdFile = new JETFile(readString.toString(), writeToURI);
+
+        editorWindow.setFile(createdFile);
 
 
     }
