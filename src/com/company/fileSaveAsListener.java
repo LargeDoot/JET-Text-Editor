@@ -6,20 +6,26 @@ import java.awt.event.ActionListener;
 
 public class fileSaveAsListener extends JFrame implements ActionListener {
 
+    EditorWindow window;
     JETFile fileToSave;
 
-    public fileSaveAsListener(JETFile file) {
+    public fileSaveAsListener(EditorWindow window) {
 
-        this.fileToSave = file;
+        this.window = window;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        System.out.println("File > Open");
+        System.out.println("File > Save As");
 
-        fileToSave.setFileLocation( new FileBrowser().getURI() );
+        this.fileToSave = window.getCurrentFile();
+        fileToSave.setTextContents(window.getText());
+
+
+        fileToSave.setFileLocation(new FileBrowser().getURI());
         new ReaderWriter(fileToSave);
+
 
     }
 

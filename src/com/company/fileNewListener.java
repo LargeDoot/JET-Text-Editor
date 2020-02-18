@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 
 public class fileNewListener extends JFrame implements ActionListener {
 
-    public fileNewListener(EditorWindow editorWindow) {
+    public fileNewListener() {
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        new EditorWindow().setVisible(true);
+        new EditorWindow(new JETFile()).setVisible(true);
 
     }
 }

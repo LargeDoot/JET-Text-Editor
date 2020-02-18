@@ -22,8 +22,11 @@ public class fileOpenListener extends JFrame implements ActionListener {
         String readLocation = new FileBrowser().getURI();
         new ReaderWriter(readLocation, editorWindow);
 
-        editorWindow.setCurrentWorkingDirectory(readLocation);
-        editorWindow.setTitle(String.format("JET \t | \t %s", readLocation));
+        if (readLocation != null) {
+            editorWindow.setCurrentWorkingDirectory(readLocation);
+            editorWindow.setTitle(String.format("JET \t | \t %s", readLocation));
+
+        }
 
     }
 

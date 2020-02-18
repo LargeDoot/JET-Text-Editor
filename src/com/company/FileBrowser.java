@@ -29,6 +29,10 @@ public class FileBrowser extends JFrame {
 
         }
 
+        //Dispose of this frame to ensure the application closes properly
+        dispose();
+
+
         return filePath;
     }
 

@@ -2,6 +2,8 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class EditorWindow extends JFrame {
 
@@ -20,9 +22,11 @@ public class EditorWindow extends JFrame {
 
     private JETFile currentFile;
 
-    public EditorWindow() {
+    public EditorWindow(JETFile file) {
 
         super("Jet Editor");
+
+        currentFile = new JETFile();
 
         jetIcon = new ImageIcon("images/JET Logo.png");
         setIconImage(jetIcon.getImage());
@@ -83,6 +87,15 @@ public class EditorWindow extends JFrame {
 
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Closed");
+                Frame[] hello = Frame.getFrames();
+            }
+        });
+
+
         pack();
 
     }
@@ -128,10 +141,10 @@ public class EditorWindow extends JFrame {
         fileOpen = new JMenuItem("Open");
         fileExit = new JMenuItem("Exit");
 
-        fileNew.addActionListener(new fileNewListener(this));
+        fileNew.addActionListener(new fileNewListener());
         fileOpen.addActionListener(new fileOpenListener(this));
-        fileSaveAs.addActionListener(new fileSaveAsListener(currentFile));
-        fileSaveAs.addActionListener(new fileSaveAsListener(currentFile));
+        fileSave.addActionListener(new fileSaveListener(this));
+        fileSaveAs.addActionListener(new fileSaveAsListener(this));
         fileExit.addActionListener(new fileExitListener(this));
 
         editCopy = new JMenuItem("Copy");
@@ -181,7 +194,7 @@ public class EditorWindow extends JFrame {
 
         scrollPane = new JScrollPane(textArea);
 
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         scrollPane.setPreferredSize(new Dimension(1000, 550));
@@ -203,6 +216,7 @@ public class EditorWindow extends JFrame {
     public void setFile(JETFile file) {
 
         currentFile = file;
+        textArea.setText(file.getTextContents());
 
     }
 
@@ -214,5 +228,9 @@ public class EditorWindow extends JFrame {
     public void setCurrentWorkingDirectory(String currentWorkingDirectory) {
 
         this.currentWorkingDirectory = currentWorkingDirectory;
+    }
+
+    public JETFile getCurrentFile() {
+        return currentFile;
     }
 }

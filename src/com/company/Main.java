@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new EditorWindow().setVisible(true);
+        new EditorWindow(new JETFile()).setVisible(true);
 
     }
 

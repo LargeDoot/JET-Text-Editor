@@ -15,7 +15,6 @@ public class ReaderWriter {
 
         try {
             writeFile();
-            System.out.printf("Write to location %s successful!%n", writeToURI);
         } catch (IOException e) {
             System.err.printf("Write to location %s failed!%n", writeToURI);
         }
@@ -42,12 +41,20 @@ public class ReaderWriter {
     //File writer
     private void writeFile() throws IOException {
 
-        FileWriter writer = new FileWriter(writeToURI);
-        BufferedWriter buffer = new BufferedWriter(writer);
+        try {
+            FileWriter writer = new FileWriter(writeToURI);
+            BufferedWriter buffer = new BufferedWriter(writer);
 
-        buffer.write(writeToText);
+            buffer.write(writeToText);
 
-        buffer.close();
+            buffer.close();
+
+            System.out.printf("Write to location %s successful!%n", writeToURI);
+        } catch (NullPointerException e) {
+
+            System.err.println("User cancelled save operation.");
+
+        }
 
     }
 
@@ -70,6 +77,7 @@ public class ReaderWriter {
             }
 
             br.close();
+            System.out.println("Reader closed!");
 
         } catch (NullPointerException e) {
             System.err.println("User cancelled open operation.");
