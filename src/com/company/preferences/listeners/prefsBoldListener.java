@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class prefsBoldListener extends JFrame implements ItemListener {
+public class prefsBoldListener implements ItemListener {
 
     EditorWindow window;
 
@@ -20,20 +20,26 @@ public class prefsBoldListener extends JFrame implements ItemListener {
     }
 
     @Override
-    public void itemStateChanged(ItemEvent actionEvent) {
+    public void itemStateChanged(ItemEvent event) {
 
-        if (actionEvent.getStateChange() == ItemEvent.SELECTED) {
+        if (event.getStateChange() == ItemEvent.SELECTED) {
 
-            window.getPrefs().setBold(true);
-            window.setTextFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-            System.out.println("Setting BOLD to TRUE");
+            setFontStyle(true, Font.BOLD, "Setting BOLD to TRUE");
         } else {
 
-            window.getPrefs().setBold(false);
-            window.setTextFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
-            System.out.println("Setting BOLD to FALSE");
+            setFontStyle(false, Font.PLAIN, "Setting BOLD to FALSE");
         }
 
 
     }
+
+    private void setFontStyle(boolean prefsSetBold, int style, String message) {
+
+        Font initialFont = window.getFont();
+
+        window.getPrefs().setBold(prefsSetBold);
+        window.setWindowFont( new Font( initialFont.getFontName(), style, initialFont.getSize() ) );
+        System.out.println(message);
+    }
+
 }
