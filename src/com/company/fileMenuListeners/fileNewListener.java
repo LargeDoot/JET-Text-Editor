@@ -1,4 +1,7 @@
-package com.company;
+package com.company.fileMenuListeners;
+
+import com.company.EditorWindow;
+import com.company.JETFile;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +15,7 @@ public class fileNewListener extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        new EditorWindow(new JETFile()).setVisible(true);
+        new EditorWindow().setVisible(true);
 
     }
 }

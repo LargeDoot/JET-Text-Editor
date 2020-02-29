@@ -1,4 +1,6 @@
-package com.company;
+package com.company.fileMenuListeners;
+
+import com.company.EditorWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

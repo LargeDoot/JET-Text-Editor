@@ -1,4 +1,9 @@
-package com.company;
+package com.company.fileMenuListeners;
+
+import com.company.EditorWindow;
+import com.company.FileBrowser;
+import com.company.JETFile;
+import com.company.ReaderWriter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

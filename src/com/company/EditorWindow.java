@@ -1,9 +1,10 @@
 package com.company;
 
+import com.company.fileMenuListeners.*;
+import com.company.preferences.TextPrefs;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class EditorWindow extends JFrame {
 
@@ -22,18 +23,29 @@ public class EditorWindow extends JFrame {
 
     private JETFile currentFile;
 
-    public EditorWindow(JETFile file) {
+    private TextPrefs windowPreferences;
+
+    public EditorWindow() {
 
         super("Jet Editor");
 
-        currentFile = new JETFile();
+        //Add the system's look anf feel to make the window look normal in the current OS
+        //Set the font size to the system's default "TextField" font size (otherwise it is very small)
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.getDefaults().put("TextArea.font", UIManager.getFont("TextField.font"));
+        } catch (Exception ignored) {
+        }
 
+        //Create objects for the file, prefs and style
+        currentFile = new JETFile();
+        windowPreferences = new TextPrefs(this);
+
+        //Set the icon for the editor window
         jetIcon = new ImageIcon("images/JET Logo.png");
         setIconImage(jetIcon.getImage());
 
-        System.out.println("Working Directory = " +
-                System.getProperty("user.dir"));
-
+        //Set the layout to border layout
         BorderLayout layout = new BorderLayout(50, 0);
         setLayout(layout);
 
@@ -79,25 +91,25 @@ public class EditorWindow extends JFrame {
 
         add(scrollPane, BorderLayout.CENTER);
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ignored) {
-        }
-        SwingUtilities.updateComponentTreeUI(this);
-
+        //Set the close operation to dispose of the window when closed, allowing for multiple windows
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Closed");
-                Frame[] hello = Frame.getFrames();
-            }
-        });
+        setPrefFormatting(); // Align the formatting to the preferences
 
-
+        //Pack the window
         pack();
 
+    }
+
+    private void setPrefFormatting() {
+        if (windowPreferences.isBold()) {
+
+            textArea.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+
+            Font test = new Font(Font.SANS_SERIF, Font.BOLD, 40);
+
+
+        }
     }
 
     private void initToolbar() {
@@ -154,6 +166,8 @@ public class EditorWindow extends JFrame {
 
         formatWordWrap = new JMenuItem("Word Wrap");
         formatFont = new JMenuItem("Font...");
+
+        formatFont.addActionListener(new formatFontListener(this));
 
         viewZoom = new JMenuItem("Zoom");
 
@@ -230,7 +244,17 @@ public class EditorWindow extends JFrame {
         this.currentWorkingDirectory = currentWorkingDirectory;
     }
 
+    public void setTextFont(Font font) {
+
+        this.textArea.setFont(font);
+
+    }
+
     public JETFile getCurrentFile() {
         return currentFile;
+    }
+
+    public TextPrefs getPrefs() {
+        return windowPreferences;
     }
 }
