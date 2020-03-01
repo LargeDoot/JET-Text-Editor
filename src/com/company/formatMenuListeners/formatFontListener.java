@@ -1,15 +1,12 @@
-package com.company.fileMenuListeners;
+package com.company.formatMenuListeners;
 
 import com.company.EditorWindow;
-import com.company.JETFile;
-import com.company.preferences.PreferencesWindow;
+import com.company.preferences.PreferencesDialog;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class formatFontListener extends JFrame implements ActionListener {
+public class formatFontListener implements ActionListener {
 
     EditorWindow window;
 
@@ -25,7 +22,7 @@ public class formatFontListener extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        new PreferencesWindow(window).setVisible(true);
+        new PreferencesDialog(window);
 
     }
 }

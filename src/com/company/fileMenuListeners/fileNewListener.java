@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class fileNewListener extends JFrame implements ActionListener {
+public class fileNewListener implements ActionListener {
 
     public fileNewListener() {
     }

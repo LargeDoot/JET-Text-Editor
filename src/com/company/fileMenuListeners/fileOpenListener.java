@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class fileOpenListener extends JFrame implements ActionListener {
+public class fileOpenListener implements ActionListener {
 
     EditorWindow editorWindow;
 

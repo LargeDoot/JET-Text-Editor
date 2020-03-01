@@ -1,36 +1,67 @@
 package com.company.preferences.listeners;
 
 import com.company.EditorWindow;
+import com.company.preferences.PreferencesDialog;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.HashSet;
+import java.util.Set;
 
-public class prefsFontListener extends JFrame implements ActionEvent {
+public class prefsFontListener implements ItemListener {
 
     EditorWindow window;
+    PreferencesDialog dialog;
 
-    public prefsFontListener(EditorWindow window) {
+    public prefsFontListener(EditorWindow window, PreferencesDialog dialog) {
 
         this.window = window;
+        this.dialog = dialog;
 
     }
 
     @Override
-    public void itemStateChanged(ActionEvent actionEvent) {
+    public void itemStateChanged(ItemEvent event) {
 
-        if (actionEvent.getStateChange() == ItemEvent.SELECTED) {
+        //No font is changed here, the change is called in the fontStyle listener
 
-            window.getPrefs().setBold(true);
-            window.setTextFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-            System.out.println("Setting BOLD to TRUE");
-        } else {
+        if (event.getStateChange() == ItemEvent.SELECTED) {
+            Object selectedFont = event.getItem();
 
-            window.getPrefs().setBold(false);
-            window.setTextFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
-            System.out.println("Setting BOLD to FALSE");
+            Set<String> fontStyles = getAvailableStyles(selectedFont.toString());
+
+            DefaultComboBoxModel currentModel = dialog.getDefaultComboBoxModel();
+            currentModel.removeAllElements();
+
+            ItemListener[] listener =  currentModel.getListeners(ItemListener.class);//todo get the listener and disable it somehow to stop the listneer triggering when the combno box is populated!!
+
+            for (String currentStyle : fontStyles) {
+
+                currentModel.addElement(currentStyle);
+
+            }
+        }
+    }
+
+    //Method from https://stackoverflow.com/questions/21091711/get-available-font-styles-for-font-family
+    public static Set<String> getAvailableStyles(String name) {
+        Set<String> styles = new HashSet<String>();
+        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Font[] fonts = e.getAllFonts();
+        for (Font f : fonts)
+        {
+            if ( f.getFamily().equals(name) ){
+                styles.add(f.getName());
+            }
+
+
         }
 
+        new DefaultComboBoxModel<>();
 
+        return styles;
     }
+
 }

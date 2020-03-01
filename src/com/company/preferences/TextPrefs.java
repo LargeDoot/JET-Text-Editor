@@ -8,15 +8,16 @@ import java.util.prefs.Preferences;
 public class TextPrefs {
 
     private final String BOLD = "bold";
+    private final String FONT_NAME = "fontName";
+    private final String FONT_SIZE = "fontSize";
     private Preferences prefs;
+
     private int fontSize;
     private boolean bold, italic, underline;
-    private String colour;
-    private EditorWindow currentWindow;
+    private String fontName;
 
     public TextPrefs(EditorWindow currentWindow) {
 
-        this.currentWindow = currentWindow;
         updatePrefs();
 
     }
@@ -32,19 +33,14 @@ public class TextPrefs {
 
         // First we will get the values
         System.out.println(prefs.getBoolean(BOLD, false));
-        System.out.println(prefs.getBoolean("italic", false));
-        System.out.println(prefs.getBoolean("underline", false));
+        System.out.println(prefs.getInt(FONT_SIZE, 11));
+        System.out.println(prefs.get(FONT_NAME, "Tahoma"));
+
 
         bold = prefs.getBoolean(BOLD, false);
+        fontSize = prefs.getInt(FONT_SIZE, 11);
+        fontName = prefs.get(FONT_NAME, "Tahoma");
 
-    }
-
-    public Preferences getPrefs() {
-        return prefs;
-    }
-
-    public void setPrefs(Preferences prefs) {
-        this.prefs = prefs;
     }
 
     public int getFontSize() {
@@ -53,6 +49,7 @@ public class TextPrefs {
 
     public void setFontSize(int fontSize) {
         this.fontSize = fontSize;
+        prefs.putInt(FONT_SIZE, fontSize);
     }
 
     public boolean isBold() {
@@ -65,28 +62,13 @@ public class TextPrefs {
         prefs.putBoolean(BOLD, bold);
     }
 
-    public boolean isItalic() {
-        return italic;
+    public String getFontName() {
+        return fontName;
     }
 
-    public void setItalic(boolean italic) {
-        this.italic = italic;
-    }
-
-    public boolean isUnderline() {
-        return underline;
-    }
-
-    public void setUnderline(boolean underline) {
-        this.underline = underline;
-    }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
+    public void setFontName(String fontName) {
+        this.fontName = fontName;
+        prefs.put(FONT_NAME, fontName);
     }
 
 }

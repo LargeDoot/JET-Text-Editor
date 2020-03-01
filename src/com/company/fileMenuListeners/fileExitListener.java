@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class fileExitListener extends JFrame implements ActionListener {
+public class fileExitListener implements ActionListener {
 
     EditorWindow window;
 

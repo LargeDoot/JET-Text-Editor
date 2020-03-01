@@ -35,10 +35,18 @@ public class prefsBoldListener implements ItemListener {
 
     private void setFontStyle(boolean prefsSetBold, int style, String message) {
 
-        Font initialFont = window.getFont();
+        Font initialFont = window.getWindowFont();
+        String initialFontName = initialFont.getFontName();
 
         window.getPrefs().setBold(prefsSetBold);
-        window.setWindowFont( new Font( initialFont.getFontName(), style, initialFont.getSize() ) );
+
+        if (initialFontName.contains(" Bold")) {
+
+            initialFontName = initialFontName.replace(" Bold", "");
+
+        }
+
+        window.setWindowFont( new Font( initialFontName, style, initialFont.getSize() ) );
         System.out.println(message);
     }
 
