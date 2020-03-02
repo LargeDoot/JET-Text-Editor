@@ -91,15 +91,8 @@ public class EditorWindow extends JFrame {
         //Initialise the text area
         initTextArea();
 
-        //Apply the font that is stored in the preferences file
-        applyInitialFont();
-
         //Initialise the scroll area
         initScrollPane();
-
-        //Add two empty JPanels to the east and west to provide padding to the edges of the TextArea todo
-//        add(new JPanel(), BorderLayout.WEST);
-//        add(new JPanel(), BorderLayout.EAST);
 
         add(scrollPane, BorderLayout.CENTER);
 
@@ -117,11 +110,12 @@ public class EditorWindow extends JFrame {
     }
 
     private void setPrefFormatting() {
-        if (windowPreferences.isBold()) {
 
-            textArea.setFont( new Font( windowFont.getFontName(), Font.BOLD, windowFont.getSize() ) );
+        String fontName = windowPreferences.getFontName();
+        int fontSize = windowPreferences.getFontSize();
 
-        }
+        setWindowFont( new Font( fontName, Font.PLAIN, fontSize) );
+
     }
 
     private void initToolbar() {
@@ -229,15 +223,6 @@ public class EditorWindow extends JFrame {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         scrollPane.setPreferredSize(new Dimension(1000, 550));
-
-    }
-
-    private void applyInitialFont() {
-
-        String fontName = windowPreferences.getFontName();
-        int fontSize = windowPreferences.getFontSize();
-
-        textArea.setFont( new Font( fontName, Font.PLAIN, fontSize) );
 
     }
 

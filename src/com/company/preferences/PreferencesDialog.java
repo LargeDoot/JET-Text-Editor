@@ -60,7 +60,7 @@ public class PreferencesDialog {
         fontSize = new JLabel("Font size");
         container.add(fontSize);
 
-        int currentFontSize = window.getWindowFont().getSize();
+        int currentFontSize = window.getPrefs().getFontSize();
         fontSizeModel = new SpinnerNumberModel(currentFontSize, 11, 72, 1);
         fontSizeModel.addChangeListener(new prefsFontSizeListener(window));
 
@@ -95,15 +95,18 @@ public class PreferencesDialog {
         //Make the dialog open in the center of the screen (not the top left)
         prefs.setLocationRelativeTo(null);
 
-        //Align the components with the actual preferences
+        //Align the font components with the actual preferences
         String initialFontFamily = window.getPrefs().getFontName();
+        String initialFont = window.getPrefs().getFontName();
 
         initialFontFamily = initialFontFamily.replace(" Bold", "");
         initialFontFamily = initialFontFamily.replace(" Italic", "");
-        System.out.println(window.getPrefs().getFontName());
+
         fontList.setSelectedItem(initialFontFamily);
-        System.out.println(window.getPrefs().getFontName());
-        fontStyleList.setSelectedItem(window.getPrefs().getFontName());
+        fontStyleList.setSelectedItem(initialFont);
+
+        //Align the font size with the actual preferences
+//        fontSizeSelector.setModel();
 
         //Add the container to the dialog and make it visible
         prefs.add(container);
@@ -122,6 +125,11 @@ public class PreferencesDialog {
     public DefaultComboBoxModel getDefaultComboBoxModel() {
 
         return styleModel;
+    }
+
+    public JComboBox getStyleComboBox() {
+
+        return fontStyleList;
     }
 
 }
