@@ -2,7 +2,6 @@ package com.company.preferences;
 
 import com.company.EditorWindow;
 import com.company.preferences.listeners.prefsFontListener;
-import com.company.preferences.listeners.prefsBoldListener;
 import com.company.preferences.listeners.prefsFontSizeListener;
 import com.company.preferences.listeners.prefsFontStyleListener;
 
@@ -46,15 +45,6 @@ public class PreferencesDialog {
 
         //Add a border around the window so that components never touch the edge
         container.setBorder( new EmptyBorder(10, 10, 10, 10) );
-
-        //Add bold button components
-        boldLabel = new JLabel("Bold Button");
-        container.add(boldLabel);
-
-        boldButton = new JCheckBox("Bold", window.getPrefs().isBold());
-        boldButton.addItemListener(new prefsBoldListener(window));
-        container.add(boldButton);
-
 
         //Add font size spinner components
         fontSize = new JLabel("Font size");

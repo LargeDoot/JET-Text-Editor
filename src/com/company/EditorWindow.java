@@ -4,8 +4,6 @@ import com.company.fileMenuListeners.*;
 import com.company.formatMenuListeners.formatFontListener;
 import com.company.formatMenuListeners.formatWrapListener;
 import com.company.preferences.TextPrefs;
-import com.company.preferences.listeners.prefsBoldListener;
-import javafx.scene.text.FontSmoothingType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -127,8 +125,6 @@ public class EditorWindow extends JFrame {
         toolbarButton1 = new JToggleButton("Button 1");
         toolbarButton2 = new JButton("Button 2");
         toolbarButton3 = new JButton("Button 3");
-
-        toolbarButton1.addItemListener( new prefsBoldListener(this) );
 
         toolBar = new JToolBar();
         toolBar.add(toolbarButton1);
