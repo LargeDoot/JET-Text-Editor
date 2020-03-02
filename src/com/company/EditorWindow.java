@@ -1,13 +1,18 @@
 package com.company;
 
+import com.company.fileMenuListeners.*;
+import com.company.formatMenuListeners.formatFontListener;
+import com.company.formatMenuListeners.formatWrapListener;
+import com.company.preferences.TextPrefs;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class EditorWindow extends JFrame {
 
-    ImageIcon jetIcon;
+    private ImageIcon jetIcon;
+
+    JPanel statusBar;
 
     private JScrollPane scrollPane;
     private JTextArea textArea;
@@ -22,18 +27,32 @@ public class EditorWindow extends JFrame {
 
     private JETFile currentFile;
 
-    public EditorWindow(JETFile file) {
+    private TextPrefs windowPreferences;
+
+    private Font windowFont;
+
+    public EditorWindow() {
 
         super("Jet Editor");
 
-        currentFile = new JETFile();
+        //Add the system's look anf feel to make the window look normal in the current OS
+        //Set the font size to the system's default "TextField" font size (otherwise it is very small on some screens)
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            windowFont = UIManager.getFont("TextField.font");
+            UIManager.getDefaults().put("TextArea.font", windowFont);
+        } catch (Exception ignored) {
+        }
 
+        //Create objects for the file, prefs and style
+        currentFile = new JETFile();
+        windowPreferences = new TextPrefs(this);
+
+        //Set the icon for the editor window
         jetIcon = new ImageIcon("images/JET Logo.png");
         setIconImage(jetIcon.getImage());
 
-        System.out.println("Working Directory = " +
-                System.getProperty("user.dir"));
-
+        //Set the layout to border layout
         BorderLayout layout = new BorderLayout(50, 0);
         setLayout(layout);
 
@@ -49,7 +68,7 @@ public class EditorWindow extends JFrame {
         add(toolBar, BorderLayout.NORTH);
 
         //Add status bar to bottom of the window
-        JPanel statusBar = new JPanel();
+        statusBar = new JPanel();
         statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.LINE_AXIS));
 
         wordCount = new JLabel(" Words: x \t Chars: x ");
@@ -73,39 +92,37 @@ public class EditorWindow extends JFrame {
         //Initialise the scroll area
         initScrollPane();
 
-        //Add two empty JPanels to the east and west to provide padding to the edges of the TextArea
-//        add(new JPanel(), BorderLayout.WEST);
-//        add(new JPanel(), BorderLayout.EAST);
-
         add(scrollPane, BorderLayout.CENTER);
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ignored) {
-        }
-        SwingUtilities.updateComponentTreeUI(this);
-
+        //Set the close operation to dispose of the window when closed, allowing for multiple windows
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Closed");
-                Frame[] hello = Frame.getFrames();
-            }
-        });
+        // Align the formatting to the preferences
+        setPrefFormatting();
 
-
+        //Pack the window
         pack();
+
+        //Make the window open in the center of the screen (not the top left)
+        setLocationRelativeTo(null);
+    }
+
+    private void setPrefFormatting() {
+
+        String fontName = windowPreferences.getFontName();
+        int fontSize = windowPreferences.getFontSize();
+
+        setWindowFont( new Font( fontName, Font.PLAIN, fontSize) );
 
     }
 
     private void initToolbar() {
 
-        JButton toolbarButton1, toolbarButton2, toolbarButton3;
+        JButton toolbarButton2, toolbarButton3;
+        JToggleButton toolbarButton1;
 
         //Setup toolbar and buttons for toolbar
-        toolbarButton1 = new JButton("Button 1");
+        toolbarButton1 = new JToggleButton("Button 1");
         toolbarButton2 = new JButton("Button 2");
         toolbarButton3 = new JButton("Button 3");
 
@@ -120,7 +137,8 @@ public class EditorWindow extends JFrame {
         JMenu menuFile, menuEdit, menuFormat, menuView, menuHelp;
         JMenuItem fileNew, fileSave, fileSaveAs, fileOpen, fileExit;
         JMenuItem editCopy, editPaste, editFind, editReplace;
-        JMenuItem formatWordWrap, formatFont;
+        JMenuItem formatFont;
+        JCheckBoxMenuItem formatWordWrap;
         JMenuItem viewZoom;
         JMenuItem helpHelp;
 
@@ -152,8 +170,11 @@ public class EditorWindow extends JFrame {
         editFind = new JMenuItem("Find");
         editReplace = new JMenuItem("Replace");
 
-        formatWordWrap = new JMenuItem("Word Wrap");
+        formatWordWrap = new JCheckBoxMenuItem("Word Wrap", true);
         formatFont = new JMenuItem("Font...");
+
+        formatWordWrap.addItemListener(new formatWrapListener(this));
+        formatFont.addActionListener(new formatFontListener(this));
 
         viewZoom = new JMenuItem("Zoom");
 
@@ -195,42 +216,54 @@ public class EditorWindow extends JFrame {
         scrollPane = new JScrollPane(textArea);
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         scrollPane.setPreferredSize(new Dimension(1000, 550));
 
     }
 
     private void initTextArea() {
-
         textArea = new JTextArea(50, 50);
         textArea.setLineWrap(true);
     }
 
     public String getText() {
-
         return textArea.getText();
-
     }
 
     public void setFile(JETFile file) {
-
         currentFile = file;
         textArea.setText(file.getTextContents());
-
     }
 
     public String getCurrentWorkingDirectory() {
-
         return currentWorkingDirectory;
     }
 
     public void setCurrentWorkingDirectory(String currentWorkingDirectory) {
-
         this.currentWorkingDirectory = currentWorkingDirectory;
     }
 
     public JETFile getCurrentFile() {
         return currentFile;
+    }
+
+    public TextPrefs getPrefs() {
+        return windowPreferences;
+    }
+
+    public Font getWindowFont() {
+        return windowFont;
+    }
+
+    public void setWindowFont(Font windowFont) {
+        this.windowFont = windowFont;
+        this.textArea.setFont(windowFont);
+    }
+
+    public void setTextWrap(Boolean wrap) {
+
+        this.textArea.setLineWrap(wrap);
+
     }
 }
