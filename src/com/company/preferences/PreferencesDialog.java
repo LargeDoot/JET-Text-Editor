@@ -50,7 +50,7 @@ public class PreferencesDialog {
         fontSize = new JLabel("Font size");
         container.add(fontSize);
 
-        int currentFontSize = window.getPrefs().getFontSize() - window.getZoomLevel();
+        int currentFontSize = window.getPrefs().getFontSize();
         fontSizeModel = new SpinnerNumberModel(currentFontSize, 11, 72, 1);
         fontSizeModel.addChangeListener(new prefsFontSizeListener(window));
 

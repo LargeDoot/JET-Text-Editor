@@ -3,6 +3,9 @@ package com.company;
 import com.company.listeners.fileMenuListeners.*;
 import com.company.listeners.formatMenuListeners.formatFontListener;
 import com.company.listeners.formatMenuListeners.formatWrapListener;
+import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomInListener;
+import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomOutListener;
+import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomResetListener;
 import com.company.listeners.windowCloseListeners.windowCloseListener;
 import com.company.preferences.TextPrefs;
 import com.company.listeners.viewMenuListeners.viewToolbarToggleListener;
@@ -34,6 +37,7 @@ public class EditorWindow extends JFrame {
     private Font windowFont;
 
     private int zoomLevel;
+    
 
     public EditorWindow() {
 
@@ -156,7 +160,7 @@ public class EditorWindow extends JFrame {
         JMenuItem formatFont;
         JCheckBoxMenuItem formatWordWrap, viewToolbarToggle;
         JMenu viewZoom;
-        JMenuItem zoomIn, zoomOut, zoomDefault;
+        JMenuItem zoomIn, zoomOut, zoomReset;
         JMenuItem helpHelp;
 
         JSeparator fileSeparator1, editSeparator1;
@@ -196,14 +200,18 @@ public class EditorWindow extends JFrame {
         viewZoom = new JMenu("Zoom");
         zoomIn = new JMenuItem("Zoom In");
         zoomOut = new JMenuItem("Zoom Out");
-        zoomDefault = new JMenuItem("Reset to default");
+        zoomReset = new JMenuItem("Reset to default");
         viewToolbarToggle = new JCheckBoxMenuItem("Show toolbar", true);
+
+        //Add action listeners to the zoom buttons
+        zoomIn.addActionListener(new zoomInListener(this));
+        zoomOut.addActionListener(new zoomOutListener(this));
+        zoomReset.addActionListener(new zoomResetListener(this));
 
         viewZoom.add(zoomIn);
         viewZoom.add(zoomOut);
-        viewZoom.add(zoomDefault);
+        viewZoom.add(zoomReset);
 
-//        viewZoom.addItemListener( new viewToolbarToggleListener(this) );
         viewToolbarToggle.addItemListener(new viewToolbarToggleListener(this));
 
         helpHelp = new JMenuItem("Help");
@@ -311,7 +319,8 @@ public class EditorWindow extends JFrame {
     public void setZoomLevel(int zoomLevel) {
 
         this.zoomLevel = zoomLevel;
-        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (windowFont.getSize() + zoomLevel)));
+        System.out.println(windowFont.getSize());
+        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (windowFont.getSize() + this.zoomLevel)));
 
     }
 

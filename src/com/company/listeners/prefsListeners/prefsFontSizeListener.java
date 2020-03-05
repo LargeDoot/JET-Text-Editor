@@ -28,13 +28,15 @@ public class prefsFontSizeListener implements ChangeListener {
 
         if (lastValue != null && !model.getValue().equals(lastValue)) {
 
-            System.out.println( (int)model.getValue() );
+            System.out.println((int) model.getValue());
 
             Font initialFont = window.getWindowFont();
 
-            window.getPrefs().setFontSize( (int)model.getValue() );
-            window.setWindowFont( new Font (
-                    initialFont.getFontName(), initialFont.getStyle(), (int)model.getValue() ) );
+            int newFontSize = (int) model.getValue() + window.getZoomLevel();
+
+            window.getPrefs().setFontSize((int) model.getValue());
+            window.setWindowFont(new Font(
+                    initialFont.getFontName(), initialFont.getStyle(), newFontSize));
 
         }
 

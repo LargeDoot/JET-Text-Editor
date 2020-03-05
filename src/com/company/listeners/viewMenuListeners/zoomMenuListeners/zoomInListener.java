@@ -7,13 +7,19 @@ import java.awt.event.ActionListener;
 
 public class zoomInListener implements ActionListener {
 
-    public zoomInListener() {
+    EditorWindow window;
+
+    public zoomInListener(EditorWindow editorWindow) {
+
+        this.window = editorWindow;
+
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        new EditorWindow().setVisible(true);
+        System.out.println(window.getZoomLevel() + 8);
+        window.setZoomLevel(window.getZoomLevel() + 8);
 
     }
 }

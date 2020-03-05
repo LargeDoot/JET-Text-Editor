@@ -7,13 +7,18 @@ import java.awt.event.ActionListener;
 
 public class zoomResetListener implements ActionListener {
 
-    public zoomResetListener() {
+    EditorWindow window;
+
+    public zoomResetListener(EditorWindow editorWindow) {
+
+        this.window = editorWindow;
+
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        new EditorWindow().setVisible(true);
+        window.setZoomLevel(0);
 
     }
 }
