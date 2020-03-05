@@ -1,4 +1,4 @@
-package com.company.formatMenuListeners;
+package com.company.listeners.formatMenuListeners;
 
 import com.company.EditorWindow;
 import com.company.preferences.PreferencesDialog;

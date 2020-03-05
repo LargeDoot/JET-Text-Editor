@@ -1,4 +1,4 @@
-package com.company.preferences.listeners;
+package com.company.listeners.prefsListeners;
 
 import com.company.EditorWindow;
 
@@ -6,8 +6,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class prefsFontSizeListener implements ChangeListener {
 

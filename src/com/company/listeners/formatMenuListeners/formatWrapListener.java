@@ -1,8 +1,7 @@
-package com.company.formatMenuListeners;
+package com.company.listeners.formatMenuListeners;
 
 import com.company.EditorWindow;
 
-import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 

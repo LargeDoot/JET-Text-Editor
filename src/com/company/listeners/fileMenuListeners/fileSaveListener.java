@@ -1,4 +1,4 @@
-package com.company.fileMenuListeners;
+package com.company.listeners.fileMenuListeners;
 
 import com.company.EditorWindow;
 import com.company.FileBrowser;
@@ -12,10 +12,17 @@ import java.awt.event.ActionListener;
 public class fileSaveListener implements ActionListener {
 
     EditorWindow window;
+    JDialog dialog;
     JETFile fileToSave;
 
     public fileSaveListener(EditorWindow window) {
 
+        this.window = window;
+    }
+
+    public fileSaveListener(EditorWindow window, JDialog dialog) {
+
+        this.dialog = dialog;
         this.window = window;
     }
 
@@ -28,7 +35,7 @@ public class fileSaveListener implements ActionListener {
 
         fileToSave.setTextContents(window.getText());
 
-        if (fileToSave.getFileLocation() == null) {
+        if (fileToSave.getFileLocation().equals("Untitled")) {
 
             fileToSave.setFileLocation(new FileBrowser().getURI());
 
@@ -37,6 +44,11 @@ public class fileSaveListener implements ActionListener {
 
         new ReaderWriter(fileToSave);
 
+        if (dialog != null) {
+
+            window.dispose();
+
+        }
 
     }
 
