@@ -1,9 +1,9 @@
 package com.company.preferences;
 
 import com.company.EditorWindow;
-import com.company.preferences.listeners.prefsFontListener;
-import com.company.preferences.listeners.prefsFontSizeListener;
-import com.company.preferences.listeners.prefsFontStyleListener;
+import com.company.listeners.prefsListeners.prefsFontListener;
+import com.company.listeners.prefsListeners.prefsFontSizeListener;
+import com.company.listeners.prefsListeners.prefsFontStyleListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

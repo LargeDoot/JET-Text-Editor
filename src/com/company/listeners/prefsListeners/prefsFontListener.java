@@ -1,4 +1,4 @@
-package com.company.preferences.listeners;
+package com.company.listeners.prefsListeners;
 
 import com.company.EditorWindow;
 import com.company.preferences.PreferencesDialog;

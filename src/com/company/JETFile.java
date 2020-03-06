@@ -7,7 +7,8 @@ public class JETFile {
     //Constructor for a new, empty and unsaved file
     public JETFile() {
 
-
+        textContents = "";
+        fileLocation = "Untitled";
 
     }
 
