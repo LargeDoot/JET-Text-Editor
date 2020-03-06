@@ -27,7 +27,7 @@ public class fileOpenListener implements ActionListener {
 
         if (readLocation != null) {
             editorWindow.setCurrentWorkingDirectory(readLocation);
-            editorWindow.setTitle(String.format("JET \t | \t %s", readLocation));
+            editorWindow.setTitle(String.format(" JET \t | \t %s", readLocation));
 
         }
 

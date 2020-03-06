@@ -2,13 +2,11 @@ package com.company;
 
 import com.company.listeners.fileMenuListeners.fileExitListener;
 import com.company.listeners.fileMenuListeners.fileSaveListener;
-import com.company.listeners.windowCloseListeners.windowCloseCancelListener;
+import com.company.listeners.windowListeners.windowCloseCancelListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SaveDialog {
 
