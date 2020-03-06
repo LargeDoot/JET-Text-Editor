@@ -1,6 +1,4 @@
-package com.company.listeners.windowCloseListeners;
-
-import com.company.EditorWindow;
+package com.company.listeners.windowListeners;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

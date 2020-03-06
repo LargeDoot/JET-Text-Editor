@@ -35,10 +35,6 @@ public class prefsFontListener implements ItemListener {
             DefaultComboBoxModel currentModel = dialog.getDefaultComboBoxModel();
             currentModel.removeAllElements();
 
-//            ItemListener[] listener =  currentModel.getListeners(ItemListener.class);//todo get the listener and disable it somehow to stop the listneer triggering when the combno box is populated!!
-
-            System.out.println("testomng");
-
             for (String currentStyle : fontStyles) {
 
                 currentModel.addElement(currentStyle);

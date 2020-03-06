@@ -6,7 +6,9 @@ import com.company.listeners.formatMenuListeners.formatWrapListener;
 import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomInListener;
 import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomOutListener;
 import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomResetListener;
-import com.company.listeners.windowCloseListeners.windowCloseListener;
+import com.company.listeners.windowListeners.textKeyListener;
+import com.company.listeners.windowListeners.textMouseListener;
+import com.company.listeners.windowListeners.windowCloseListener;
 import com.company.preferences.TextPrefs;
 import com.company.listeners.viewMenuListeners.viewToolbarToggleListener;
 
@@ -26,7 +28,7 @@ public class EditorWindow extends JFrame {
 
     private JMenuBar menuBar;
 
-    private JLabel wordCount, lineColumn, zoomLevelLabel, charSet;
+    private JLabel wordCount, charCount, lineNum, lineColumn, zoomLevelLabel, charSet;
 
     private String currentWorkingDirectory;
 
@@ -41,7 +43,7 @@ public class EditorWindow extends JFrame {
 
     public EditorWindow() {
 
-        super("Jet Editor");
+        super(" Jet Editor");
 
         addWindowListener(new windowCloseListener(this));
 
@@ -81,17 +83,36 @@ public class EditorWindow extends JFrame {
         statusBar = new JPanel();
         statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.LINE_AXIS));
 
-        wordCount = new JLabel(" Words: x \t Chars: x ");
-        lineColumn = new JLabel(" Ln: x \t Col: x ");
+        wordCount = new JLabel(" Words: 0 \t ");
+        charCount = new JLabel("Chars: 0 ");
+        lineNum = new JLabel(" Ln: 0 \t ");
+        lineColumn = new JLabel("Col: 0 ");
         zoomLevelLabel = new JLabel(" 100% ");
         charSet = new JLabel(" UTF-8 ");
 
+        //Create separators for use in the bar
+        JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
+        JSeparator separator2 = new JSeparator(SwingConstants.VERTICAL);
+        JSeparator separator3 = new JSeparator(SwingConstants.VERTICAL);
+        JSeparator separator4 = new JSeparator(SwingConstants.VERTICAL);
+        separator.setMaximumSize(new Dimension(0, 20));
+        separator2.setMaximumSize(new Dimension(0, 20));
+        separator3.setMaximumSize(new Dimension(0, 20));
+        separator4.setMaximumSize(new Dimension(0, 20));
+
+
         statusBar.add(wordCount);
+        statusBar.add(charCount);
+        statusBar.add(separator4);
         statusBar.add(Box.createHorizontalGlue());
+        statusBar.add(separator3);
+        statusBar.add(lineNum);
         statusBar.add(lineColumn);
-        statusBar.add(Box.createRigidArea(new Dimension(20, 0)));
+        statusBar.add(Box.createRigidArea(new Dimension(30, 0)));
+        statusBar.add(separator);
         statusBar.add(zoomLevelLabel);
-        statusBar.add(Box.createRigidArea(new Dimension(20, 0)));
+        statusBar.add(Box.createRigidArea(new Dimension(30, 0)));
+        statusBar.add(separator2);
         statusBar.add(charSet);
 
         add(statusBar, BorderLayout.SOUTH);
@@ -262,6 +283,8 @@ public class EditorWindow extends JFrame {
     private void initTextArea() {
         textArea = new JTextArea(50, 50);
         textArea.setLineWrap(true);
+        textArea.addKeyListener(new textKeyListener(this));
+        textArea.addMouseListener(new textMouseListener(this));
     }
 
     public String getText() {
@@ -323,6 +346,29 @@ public class EditorWindow extends JFrame {
         System.out.println(windowFont.getSize());
         setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
 
+        //Set label to the correct zoom level
+        String zoomLevelText = String.format(" %s%% ", (100 + zoomLevel));
+        zoomLevelLabel.setText(zoomLevelText);
+
     }
 
+    public JLabel getWordCount() {
+        return wordCount;
+    }
+
+    public JLabel getLineColumn() {
+        return lineColumn;
+    }
+
+    public JLabel getCharCount() {
+        return charCount;
+    }
+
+    public JLabel getLineNum() {
+        return lineNum;
+    }
+
+    public JTextArea getTextArea() {
+        return textArea;
+    }
 }

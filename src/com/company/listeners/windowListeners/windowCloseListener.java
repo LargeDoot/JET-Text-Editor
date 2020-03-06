@@ -1,4 +1,4 @@
-package com.company.listeners.windowCloseListeners;
+package com.company.listeners.windowListeners;
 
 import com.company.EditorWindow;
 import com.company.SaveDialog;
