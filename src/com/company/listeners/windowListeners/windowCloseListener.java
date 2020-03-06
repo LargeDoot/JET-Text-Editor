@@ -29,8 +29,6 @@ public class windowCloseListener implements WindowListener {
 
         if (!currentText.equals(savedText)) {
 
-            System.out.println("Not equal contents");
-
             new SaveDialog(window);
 
         } else {

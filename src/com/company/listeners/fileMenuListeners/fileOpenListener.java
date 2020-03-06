@@ -20,13 +20,10 @@ public class fileOpenListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        System.out.println("File > Open");
-
         String readLocation = new FileBrowser().getURI();
         new ReaderWriter(readLocation, editorWindow);
 
         if (readLocation != null) {
-            editorWindow.setCurrentWorkingDirectory(readLocation);
             editorWindow.setTitle(String.format(" JET \t | \t %s", readLocation));
 
         }

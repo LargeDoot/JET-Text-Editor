@@ -77,7 +77,6 @@ public class ReaderWriter {
             }
 
             br.close();
-            System.out.println("Reader closed!");
 
         } catch (NullPointerException e) {
             System.err.println("User cancelled open operation.");

@@ -32,9 +32,9 @@ public class TextPrefs {
         prefs = Preferences.userRoot().node("TextPrefs");
 
         // First we will get the values
-        System.out.println(prefs.getBoolean(BOLD, false));
-        System.out.println(prefs.getInt(FONT_SIZE, 11));
-        System.out.println(prefs.get(FONT_NAME, "Tahoma"));
+        prefs.getBoolean(BOLD, false);
+        prefs.getInt(FONT_SIZE, 11);
+        prefs.get(FONT_NAME, "Tahoma");
 
 
         bold = prefs.getBoolean(BOLD, false);

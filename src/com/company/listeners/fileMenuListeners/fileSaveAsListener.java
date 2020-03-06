@@ -8,29 +8,16 @@ import com.company.ReaderWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class fileSaveAsListener implements ActionListener {
-
-    EditorWindow window;
-    JETFile fileToSave;
+public class fileSaveAsListener extends fileSaveListener implements ActionListener {
 
     public fileSaveAsListener(EditorWindow window) {
-
-        this.window = window;
+        super(window);
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-
-        System.out.println("File > Save As");
-
-        this.fileToSave = window.getCurrentFile();
-        fileToSave.setTextContents(window.getText());
-
-
+    void saveFile() {
         fileToSave.setFileLocation(new FileBrowser().getURI());
         new ReaderWriter(fileToSave);
-
-
     }
 
 }

@@ -21,11 +21,9 @@ public class formatWrapListener implements ItemListener {
         if (event.getStateChange() == ItemEvent.SELECTED) {
 
             window.setTextWrap(true);
-            System.out.println("Setting wrap true");
         } else {
 
             window.setTextWrap(false);
-            System.out.println("Setting wrap true");
         }
 
 

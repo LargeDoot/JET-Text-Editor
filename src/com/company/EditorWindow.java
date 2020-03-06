@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.listeners.editMenuListeners.editCopyListener;
+import com.company.listeners.editMenuListeners.editPasteListener;
 import com.company.listeners.fileMenuListeners.*;
 import com.company.listeners.formatMenuListeners.formatFontListener;
 import com.company.listeners.formatMenuListeners.formatWrapListener;
@@ -15,22 +17,23 @@ import com.company.listeners.viewMenuListeners.viewToolbarToggleListener;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("DuplicatedCode")
 public class EditorWindow extends JFrame {
-
-    private ImageIcon jetIcon;
 
     JPanel statusBar;
 
     private JScrollPane scrollPane;
     private JTextArea textArea;
 
-    private JToolBar toolBar;
+    private JToolBar toolbar;
 
     private JMenuBar menuBar;
 
-    private JLabel wordCount, charCount, lineNum, lineColumn, zoomLevelLabel, charSet;
-
-    private String currentWorkingDirectory;
+    private JLabel wordCount;
+    private JLabel charCount;
+    private JLabel lineNum;
+    private JLabel lineColumn;
+    private JLabel zoomLevelLabel;
 
     private JETFile currentFile;
 
@@ -61,7 +64,7 @@ public class EditorWindow extends JFrame {
         windowPreferences = new TextPrefs(this);
 
         //Set the icon for the editor window
-        jetIcon = new ImageIcon("src/com/company/resources/JETLogo.png");
+        ImageIcon jetIcon = new ImageIcon("src/com/company/resources/JETLogo.png");
         setIconImage(jetIcon.getImage());
 
         //Set the layout to border layout
@@ -77,7 +80,7 @@ public class EditorWindow extends JFrame {
         //Initialize the tool bar
         initToolbar();
 
-        add(toolBar, BorderLayout.NORTH);
+        add(toolbar, BorderLayout.NORTH);
 
         //Add status bar to bottom of the window
         statusBar = new JPanel();
@@ -88,7 +91,7 @@ public class EditorWindow extends JFrame {
         lineNum = new JLabel(" Ln: 0 \t ");
         lineColumn = new JLabel("Col: 0 ");
         zoomLevelLabel = new JLabel(" 100% ");
-        charSet = new JLabel(" UTF-8 ");
+        JLabel charSet = new JLabel(" UTF-8 ");
 
         //Create separators for use in the bar
         JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
@@ -150,27 +153,36 @@ public class EditorWindow extends JFrame {
     private void initToolbar() {
 
         JButton toolbarOpenButton, toolbarSaveButton, toolbarExitButton;
+        JButton toolbarZoomInButton, toolbarZoomOutButton;
 
         //Create icons for toolbar
-        Icon openIcon, saveIcon, exitIcon;
+        Icon openIcon, saveIcon, exitIcon, zoomInIcon, zoomOutIcon;
         openIcon = new ImageIcon("src/com/company/resources/OpenIcon40x40.png");
         saveIcon = new ImageIcon("src/com/company/resources/SaveIcon40x40.png");
         exitIcon = new ImageIcon("src/com/company/resources/ExitIcon40x40.png");
+        zoomInIcon = new ImageIcon("src/com/company/resources/ZoomInIcon40x40.png");
+        zoomOutIcon = new ImageIcon("src/com/company/resources/ZoomOutIcon40x40.png");
 
         //Setup toolbar and buttons for toolbar
         toolbarOpenButton = new JButton(openIcon);
         toolbarSaveButton = new JButton(saveIcon);
         toolbarExitButton = new JButton(exitIcon);
+        toolbarZoomInButton = new JButton(zoomInIcon);
+        toolbarZoomOutButton = new JButton(zoomOutIcon);
 
         toolbarOpenButton.addActionListener(new fileOpenListener(this));
         toolbarSaveButton.addActionListener(new fileSaveListener(this));
         toolbarExitButton.addActionListener(new fileExitListener(this));
+        toolbarZoomInButton.addActionListener(new zoomInListener(this));
+        toolbarZoomOutButton.addActionListener(new zoomOutListener(this));
 
-        toolBar = new JToolBar();
-        toolBar.add(toolbarOpenButton);
-        toolBar.add(toolbarSaveButton);
-        toolBar.add(Box.createHorizontalGlue());
-        toolBar.add(toolbarExitButton);
+        toolbar = new JToolBar();
+        toolbar.add(toolbarOpenButton);
+        toolbar.add(toolbarSaveButton);
+        toolbar.add(toolbarZoomInButton);
+        toolbar.add(toolbarZoomOutButton);
+        toolbar.add(Box.createHorizontalGlue());
+        toolbar.add(toolbarExitButton);
     }
 
     private void initMenuBar() {
@@ -211,6 +223,12 @@ public class EditorWindow extends JFrame {
         editPaste = new JMenuItem("Paste");
         editFind = new JMenuItem("Find");
         editReplace = new JMenuItem("Replace");
+
+        editCopy.addActionListener(new editCopyListener(this));
+        editPaste.addActionListener(new editPasteListener(this));
+//        editFind.addActionListener(new fileExitListener(this));
+//        editFind.addActionListener(new fileExitListener(this));
+
 
         formatWordWrap = new JCheckBoxMenuItem("Word Wrap", true);
         formatFont = new JMenuItem("Font...");
@@ -296,14 +314,6 @@ public class EditorWindow extends JFrame {
         textArea.setText(file.getTextContents());
     }
 
-    public String getCurrentWorkingDirectory() {
-        return currentWorkingDirectory;
-    }
-
-    public void setCurrentWorkingDirectory(String currentWorkingDirectory) {
-        this.currentWorkingDirectory = currentWorkingDirectory;
-    }
-
     public JETFile getCurrentFile() {
         return currentFile;
     }
@@ -330,7 +340,7 @@ public class EditorWindow extends JFrame {
 
     public JToolBar getToolbar() {
 
-        return toolBar;
+        return toolbar;
 
     }
 
@@ -343,7 +353,6 @@ public class EditorWindow extends JFrame {
     public void setZoomLevel(int zoomLevel) {
 
         this.zoomLevel = zoomLevel;
-        System.out.println(windowFont.getSize());
         setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
 
         //Set label to the correct zoom level

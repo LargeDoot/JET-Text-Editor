@@ -29,27 +29,25 @@ public class fileSaveListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        System.out.println("File > Save");
-
         this.fileToSave = window.getCurrentFile();
-
         fileToSave.setTextContents(window.getText());
 
+        saveFile();
+
+    }
+
+    void saveFile() {
         if (fileToSave.getFileLocation().equals("Untitled")) {
 
             fileToSave.setFileLocation(new FileBrowser().getURI());
-
         }
-
 
         new ReaderWriter(fileToSave);
 
         if (dialog != null) {
 
             window.dispose();
-
         }
-
     }
 
 }

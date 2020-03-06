@@ -18,7 +18,6 @@ public class zoomOutListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        System.out.println(window.getZoomLevel() - 10);
         window.setZoomLevel(window.getZoomLevel() - 10);
 
     }

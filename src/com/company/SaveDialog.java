@@ -17,8 +17,6 @@ public class SaveDialog {
     JLabel saveCheckLabel;
     JButton saveButton, dontSaveButton, cancelButton;
 
-    private DefaultComboBoxModel styleModel;
-
     public SaveDialog(EditorWindow window) {
 
         this.window = window;
@@ -70,8 +68,8 @@ public class SaveDialog {
         buttonContainer.add(cancelButton);
 
         //Create label
-        String afileName = window.getCurrentFile().getFileLocation();
-        String fileName = afileName.replaceAll(".+\\\\", "");
+        String fileLocation = window.getCurrentFile().getFileLocation();
+        String fileName = fileLocation.replaceAll(".+\\\\", "");
         String saveMessage = String.format("Do you want to save changes to '%s'", fileName);
         saveCheckLabel = new JLabel(saveMessage);
         saveCheckLabel.setFont(new Font("Segoe UI", Font.PLAIN, 24));
