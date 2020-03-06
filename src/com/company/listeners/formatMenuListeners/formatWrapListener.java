@@ -18,13 +18,18 @@ public class formatWrapListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent event) {
 
+        Boolean result;
+
         if (event.getStateChange() == ItemEvent.SELECTED) {
 
-            window.setTextWrap(true);
+            result = true;
         } else {
 
-            window.setTextWrap(false);
+            result = false;
         }
+
+        window.setTextWrap(result);
+        window.getPrefs().setWrapText(result);
 
 
     }

@@ -19,10 +19,16 @@ public class viewToolbarToggleListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 
+        Boolean result;
+
         if (e.getStateChange() == ItemEvent.SELECTED) {
-            window.getToolbar().setVisible(true);
+            result = true;
         } else {
-            window.getToolbar().setVisible(false);
+            result = false;
         }
+
+        window.getToolbar().setVisible(result);
+        window.getPrefs().setShowToolbar(result);
+
     }
 }

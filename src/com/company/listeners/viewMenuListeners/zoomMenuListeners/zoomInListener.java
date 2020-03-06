@@ -18,7 +18,10 @@ public class zoomInListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        window.setZoomLevel(window.getZoomLevel() + 10);
+        int newZoomLevel = window.getZoomLevel() + 10;
+
+        window.setZoomLevel(newZoomLevel);
+        window.getPrefs().setZoomAmount(newZoomLevel);
 
     }
 }

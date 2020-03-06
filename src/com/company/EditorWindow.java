@@ -43,6 +43,7 @@ public class EditorWindow extends JFrame {
 
     private int zoomLevel, fontSize;
 
+    JCheckBoxMenuItem formatWordWrap, viewToolbarToggle;
 
     public EditorWindow() {
 
@@ -133,6 +134,7 @@ public class EditorWindow extends JFrame {
 
         // Align the formatting to the preferences
         setPrefFormatting();
+        setMiscPrefs();
 
         //Pack the window
         pack();
@@ -191,7 +193,6 @@ public class EditorWindow extends JFrame {
         JMenuItem fileNew, fileSave, fileSaveAs, fileOpen, fileExit;
         JMenuItem editCopy, editPaste, editFind, editReplace;
         JMenuItem formatFont;
-        JCheckBoxMenuItem formatWordWrap, viewToolbarToggle;
         JMenu viewZoom;
         JMenuItem zoomIn, zoomOut, zoomReset;
         JMenuItem helpHelp;
@@ -358,6 +359,20 @@ public class EditorWindow extends JFrame {
         //Set label to the correct zoom level
         String zoomLevelText = String.format(" %s%% ", (100 + zoomLevel));
         zoomLevelLabel.setText(zoomLevelText);
+
+    }
+
+    private void setMiscPrefs() {
+
+        setZoomLevel(windowPreferences.getZoomAmount());
+
+        boolean toolBarVisible = windowPreferences.isShowToolbar();
+        toolbar.setVisible(toolBarVisible);
+        viewToolbarToggle.setSelected(toolBarVisible);
+
+        boolean textWrapped = windowPreferences.isWrapText();
+        setTextWrap(textWrapped);
+        formatWordWrap.setSelected(textWrapped);
 
     }
 

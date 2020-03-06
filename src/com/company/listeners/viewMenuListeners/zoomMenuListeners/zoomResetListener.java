@@ -19,6 +19,7 @@ public class zoomResetListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
 
         window.setZoomLevel(0);
+        window.getPrefs().setZoomAmount(0);
 
     }
 }
