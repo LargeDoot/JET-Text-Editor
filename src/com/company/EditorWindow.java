@@ -36,8 +36,8 @@ public class EditorWindow extends JFrame {
 
     private Font windowFont;
 
-    private int zoomLevel;
-    
+    private int zoomLevel, fontSize;
+
 
     public EditorWindow() {
 
@@ -296,6 +296,7 @@ public class EditorWindow extends JFrame {
     public void setWindowFont(Font windowFont) {
         this.windowFont = windowFont;
         this.textArea.setFont(windowFont);
+        this.fontSize = windowFont.getSize() - zoomLevel;
     }
 
     public void setTextWrap(Boolean wrap) {
@@ -320,7 +321,7 @@ public class EditorWindow extends JFrame {
 
         this.zoomLevel = zoomLevel;
         System.out.println(windowFont.getSize());
-        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (windowFont.getSize() + this.zoomLevel)));
+        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
 
     }
 
