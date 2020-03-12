@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class fileOpenListener implements ActionListener {
 
-    EditorWindow editorWindow;
+    final EditorWindow editorWindow;
 
     public fileOpenListener(EditorWindow editorWindow) {
 

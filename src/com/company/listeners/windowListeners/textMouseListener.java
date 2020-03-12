@@ -4,14 +4,12 @@ import com.company.EditorWindow;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class textMouseListener implements MouseListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public textMouseListener(EditorWindow window) {
 
@@ -38,7 +36,7 @@ public class textMouseListener implements MouseListener {
         }
 
         //Create strings to insert into the labels
-        String lineNumString, lineColumnString, wordCountString, charCountString;
+        String lineNumString, lineColumnString;
 
         lineNumString = String.format(" Ln: %d \t ", lineNum + 1);
         lineColumnString = String.format("Col: %d ", lineColumn + 1);

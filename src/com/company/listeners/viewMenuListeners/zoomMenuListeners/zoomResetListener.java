@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class zoomResetListener implements ActionListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public zoomResetListener(EditorWindow editorWindow) {
 

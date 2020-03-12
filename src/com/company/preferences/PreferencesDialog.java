@@ -11,23 +11,21 @@ import java.awt.*;
 
 public class PreferencesDialog {
 
-    EditorWindow window;
+    final JDialog prefs;
 
-    JDialog prefs;
+    final JLabel fontLabel;
+    final JLabel fontStyleLabel;
+    final JLabel fontSize;
 
-    JLabel boldLabel, fontLabel, fontStyleLabel, fontSize;
+    final JSpinner fontSizeSelector;
+    final SpinnerModel fontSizeModel;
 
-    JSpinner fontSizeSelector;
-    SpinnerModel fontSizeModel;
+    final JComboBox<String> fontList;
+    final JComboBox<String> fontStyleList;
 
-    JCheckBox boldButton;
-    JComboBox fontList, fontStyleList;
-
-    private DefaultComboBoxModel styleModel;
+    private final DefaultComboBoxModel<String> styleModel;
 
     public PreferencesDialog(EditorWindow window) {
-
-        this.window = window;
 
         prefs = new JDialog(window, true);
         prefs.setTitle("Font Preferences");
@@ -62,8 +60,8 @@ public class PreferencesDialog {
         fontLabel = new JLabel("Font Selector");
         container.add(fontLabel);
 
-        fontList = new JComboBox(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-        fontList.addItemListener( new prefsFontListener(window, this) );
+        fontList = new JComboBox<>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+        fontList.addItemListener(new prefsFontListener(this));
         container.add(fontList);
 
         //Add font style selector components
@@ -71,11 +69,11 @@ public class PreferencesDialog {
         container.add(fontStyleLabel);
 
         //Create a combo box model to allow changes to the contents while the program runs
-        styleModel = new DefaultComboBoxModel();
+        styleModel = new DefaultComboBoxModel<>();
 
         //Create the combo box with the new model
-        fontStyleList = new JComboBox(styleModel);
-        fontStyleList.addItemListener( new prefsFontStyleListener(window) );
+        fontStyleList = new JComboBox<>(styleModel);
+        fontStyleList.addItemListener(new prefsFontStyleListener(window));
         container.add(fontStyleList);
 
 
@@ -103,23 +101,18 @@ public class PreferencesDialog {
         prefs.setVisible(true);
 
 
-
     }
 
-    public void populateFontStyles(ComboBoxModel model) {
-
-        fontStyleList.setModel(model);
-
-    }
-
-    public DefaultComboBoxModel getDefaultComboBoxModel() {
+    public DefaultComboBoxModel<String> getDefaultComboBoxModel() {
 
         return styleModel;
     }
 
-    public JComboBox getStyleComboBox() {
-
-        return fontStyleList;
-    }
+// --Commented out by Inspection START (12/03/2020 10:05):
+//    public JComboBox<String> getStyleComboBox() {
+//
+//        return fontStyleList;
+//    }
+// --Commented out by Inspection STOP (12/03/2020 10:05)
 
 }

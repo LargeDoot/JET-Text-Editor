@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class fileSaveListener implements ActionListener {
 
-    EditorWindow window;
+    final EditorWindow window;
     JDialog dialog;
     JETFile fileToSave;
 

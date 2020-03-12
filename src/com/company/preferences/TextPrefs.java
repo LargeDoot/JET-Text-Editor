@@ -1,8 +1,5 @@
 package com.company.preferences;
 
-import com.company.EditorWindow;
-
-import java.awt.*;
 import java.util.prefs.Preferences;
 
 public class TextPrefs {
@@ -18,7 +15,7 @@ public class TextPrefs {
     private boolean showToolbar, wrapText;
     private String fontName;
 
-    public TextPrefs(EditorWindow currentWindow) {
+    public TextPrefs() {
 
         updatePrefs();
 

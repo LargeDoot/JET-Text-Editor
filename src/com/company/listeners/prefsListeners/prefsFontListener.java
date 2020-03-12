@@ -1,6 +1,5 @@
 package com.company.listeners.prefsListeners;
 
-import com.company.EditorWindow;
 import com.company.preferences.PreferencesDialog;
 
 import javax.swing.*;
@@ -12,14 +11,28 @@ import java.util.Set;
 
 public class prefsFontListener implements ItemListener {
 
-    EditorWindow window;
-    PreferencesDialog dialog;
+    final PreferencesDialog dialog;
 
-    public prefsFontListener(EditorWindow window, PreferencesDialog dialog) {
+    public prefsFontListener(PreferencesDialog dialog) {
 
-        this.window = window;
         this.dialog = dialog;
 
+    }
+
+    //Method from https://stackoverflow.com/questions/21091711/get-available-font-styles-for-font-family
+    public static Set<String> getAvailableStyles(String name) {
+        Set<String> styles = new HashSet<>();
+        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Font[] fonts = e.getAllFonts();
+        for (Font f : fonts) {
+            if (f.getFamily().equals(name)) {
+                styles.add(f.getName());
+            }
+
+
+        }
+
+        return styles;
     }
 
     @Override
@@ -32,7 +45,7 @@ public class prefsFontListener implements ItemListener {
 
             Set<String> fontStyles = getAvailableStyles(selectedFont.toString());
 
-            DefaultComboBoxModel currentModel = dialog.getDefaultComboBoxModel();
+            DefaultComboBoxModel<String> currentModel = dialog.getDefaultComboBoxModel();
             currentModel.removeAllElements();
 
             for (String currentStyle : fontStyles) {
@@ -42,23 +55,6 @@ public class prefsFontListener implements ItemListener {
             }
 
         }
-    }
-
-    //Method from https://stackoverflow.com/questions/21091711/get-available-font-styles-for-font-family
-    public static Set<String> getAvailableStyles(String name) {
-        Set<String> styles = new HashSet<String>();
-        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Font[] fonts = e.getAllFonts();
-        for (Font f : fonts)
-        {
-            if ( f.getFamily().equals(name) ){
-                styles.add(f.getName());
-            }
-
-
-        }
-
-        return styles;
     }
 
 }

@@ -8,10 +8,7 @@ import java.awt.event.ActionListener;
 
 public class formatFontListener implements ActionListener {
 
-    EditorWindow window;
-
-    public formatFontListener() {
-    }
+    final EditorWindow window;
 
     public formatFontListener(EditorWindow window) {
 

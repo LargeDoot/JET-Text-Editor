@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class zoomOutListener implements ActionListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public zoomOutListener(EditorWindow editorWindow) {
 

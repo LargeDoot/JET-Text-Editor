@@ -5,21 +5,13 @@ import java.io.File;
 
 public class FileBrowser extends JFrame {
 
-    private String defaultAddress;
-
     public FileBrowser() {
-
-    }
-
-    public FileBrowser(String defaultAddress) {
-
-        this.defaultAddress = defaultAddress;
 
     }
 
     public String getURI() {
 
-        JFileChooser fileChooser = new JFileChooser(defaultAddress);
+        JFileChooser fileChooser = new JFileChooser();
         String filePath = null;
 
         int i = fileChooser.showOpenDialog(this);

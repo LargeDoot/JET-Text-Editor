@@ -4,9 +4,7 @@ import com.company.EditorWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +12,7 @@ import java.io.IOException;
 
 public class editPasteListener implements ActionListener {
 
-    EditorWindow window;
+    final EditorWindow window;
     JTextArea textArea;
 
     public editPasteListener(EditorWindow window) {

@@ -12,12 +12,14 @@ public class JETFile {
 
     }
 
-    //Unused
-    public JETFile(String text) {
-
-        this.textContents = text;
-
-    }
+// --Commented out by Inspection START (12/03/2020 10:04):
+//    //Unused
+//    public JETFile(String text) {
+//
+//        this.textContents = text;
+//
+//    }
+// --Commented out by Inspection STOP (12/03/2020 10:04)
 
     //Constructor for a new file with pre-defined text and location
     public JETFile(String text, String location) {

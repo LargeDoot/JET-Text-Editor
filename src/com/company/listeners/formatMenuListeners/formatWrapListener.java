@@ -7,7 +7,7 @@ import java.awt.event.ItemListener;
 
 public class formatWrapListener implements ItemListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public formatWrapListener(EditorWindow window) {
 
@@ -18,15 +18,9 @@ public class formatWrapListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent event) {
 
-        Boolean result;
+        boolean result;
 
-        if (event.getStateChange() == ItemEvent.SELECTED) {
-
-            result = true;
-        } else {
-
-            result = false;
-        }
+        result = event.getStateChange() == ItemEvent.SELECTED;
 
         window.setTextWrap(result);
         window.getPrefs().setWrapText(result);

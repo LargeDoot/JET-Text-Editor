@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 public class textKeyListener implements KeyListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public textKeyListener(EditorWindow window) {
 
@@ -48,7 +48,7 @@ public class textKeyListener implements KeyListener {
         }
 
         //Get char and word counts
-        int wordCount, charCount = 0;
+        int wordCount, charCount;
 
         String[] wordList = textArea.getText().split(" ");
 

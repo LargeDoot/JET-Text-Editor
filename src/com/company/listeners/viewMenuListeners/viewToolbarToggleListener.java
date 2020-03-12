@@ -7,7 +7,7 @@ import java.awt.event.ItemListener;
 
 public class viewToolbarToggleListener implements ItemListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public viewToolbarToggleListener(EditorWindow editorWindow) {
 
@@ -19,13 +19,9 @@ public class viewToolbarToggleListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-        Boolean result;
+        boolean result;
 
-        if (e.getStateChange() == ItemEvent.SELECTED) {
-            result = true;
-        } else {
-            result = false;
-        }
+        result = e.getStateChange() == ItemEvent.SELECTED;
 
         window.getToolbar().setVisible(result);
         window.getPrefs().setShowToolbar(result);

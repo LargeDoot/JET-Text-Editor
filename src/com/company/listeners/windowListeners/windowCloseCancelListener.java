@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class windowCloseCancelListener implements ActionListener {
 
-    JDialog dialog;
+    final JDialog dialog;
 
     public windowCloseCancelListener(JDialog dialog) {
 

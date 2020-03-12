@@ -1,7 +1,6 @@
 package com.company.listeners.editMenuListeners;
 
 import com.company.EditorWindow;
-import com.sun.glass.ui.SystemClipboard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class editCopyListener implements ActionListener {
 
-    EditorWindow window;
+    final EditorWindow window;
     JTextArea textArea;
 
     public editCopyListener(EditorWindow window) {

@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class prefsFontSizeListener implements ChangeListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     Object lastValue;
     SpinnerModel model;

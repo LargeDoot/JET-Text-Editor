@@ -20,7 +20,7 @@ import java.awt.*;
 @SuppressWarnings("DuplicatedCode")
 public class EditorWindow extends JFrame {
 
-    JPanel statusBar;
+    final JPanel statusBar;
 
     private JScrollPane scrollPane;
     private JTextArea textArea;
@@ -29,15 +29,15 @@ public class EditorWindow extends JFrame {
 
     private JMenuBar menuBar;
 
-    private JLabel wordCount;
-    private JLabel charCount;
-    private JLabel lineNum;
-    private JLabel lineColumn;
-    private JLabel zoomLevelLabel;
+    private final JLabel wordCount;
+    private final JLabel charCount;
+    private final JLabel lineNum;
+    private final JLabel lineColumn;
+    private final JLabel zoomLevelLabel;
 
     private JETFile currentFile;
 
-    private TextPrefs windowPreferences;
+    private final TextPrefs windowPreferences;
 
     private Font windowFont;
 
@@ -62,7 +62,7 @@ public class EditorWindow extends JFrame {
 
         //Create objects for the file, prefs and style
         currentFile = new JETFile();
-        windowPreferences = new TextPrefs(this);
+        windowPreferences = new TextPrefs();
 
         //Set the icon for the editor window
         ImageIcon jetIcon = new ImageIcon("src/com/company/resources/JETLogo.png");
@@ -174,7 +174,7 @@ public class EditorWindow extends JFrame {
 
         toolbarOpenButton.addActionListener(new fileOpenListener(this));
         toolbarSaveButton.addActionListener(new fileSaveListener(this));
-        toolbarExitButton.addActionListener(new fileExitListener(this));
+        toolbarExitButton.addActionListener(new fileExitListener(this, true));
         toolbarZoomInButton.addActionListener(new zoomInListener(this));
         toolbarZoomOutButton.addActionListener(new zoomOutListener(this));
 
@@ -218,7 +218,7 @@ public class EditorWindow extends JFrame {
         fileOpen.addActionListener(new fileOpenListener(this));
         fileSave.addActionListener(new fileSaveListener(this));
         fileSaveAs.addActionListener(new fileSaveAsListener(this));
-        fileExit.addActionListener(new fileExitListener(this));
+        fileExit.addActionListener(new fileExitListener(this, true));
 
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");

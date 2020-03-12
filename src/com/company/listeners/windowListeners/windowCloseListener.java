@@ -8,7 +8,7 @@ import java.awt.event.WindowListener;
 
 public class windowCloseListener implements WindowListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public windowCloseListener(EditorWindow window) {
 

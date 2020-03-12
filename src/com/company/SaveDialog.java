@@ -10,16 +10,14 @@ import java.awt.*;
 
 public class SaveDialog {
 
-    EditorWindow window;
+    final JDialog checkSave;
 
-    JDialog checkSave;
-
-    JLabel saveCheckLabel;
-    JButton saveButton, dontSaveButton, cancelButton;
+    final JLabel saveCheckLabel;
+    final JButton saveButton;
+    final JButton dontSaveButton;
+    final JButton cancelButton;
 
     public SaveDialog(EditorWindow window) {
-
-        this.window = window;
 
         checkSave = new JDialog(window, true);
         checkSave.setTitle("Font Preferences");
@@ -59,7 +57,7 @@ public class SaveDialog {
 
         //Add action listeners
         saveButton.addActionListener(new fileSaveListener(window, checkSave));
-        dontSaveButton.addActionListener(new fileExitListener(window));
+        dontSaveButton.addActionListener(new fileExitListener(window, false));
         cancelButton.addActionListener(new windowCloseCancelListener(checkSave));
 
         //Add buttons
@@ -82,12 +80,6 @@ public class SaveDialog {
         checkSave.add(container);
         checkSave.setVisible(true);
 
-
-    }
-
-    public EditorWindow getWindow() {
-
-        return window;
 
     }
 

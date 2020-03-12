@@ -8,7 +8,7 @@ import java.awt.event.ItemListener;
 
 public class prefsFontStyleListener implements ItemListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public prefsFontStyleListener(EditorWindow window) {
 

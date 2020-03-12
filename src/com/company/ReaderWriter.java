@@ -4,7 +4,8 @@ import java.io.*;
 
 public class ReaderWriter {
 
-    String writeToURI, writeToText;
+    final String writeToURI;
+    String writeToText;
     EditorWindow editorWindow;
 
     //Writer constructor
@@ -62,9 +63,9 @@ public class ReaderWriter {
     private void fileReader() throws IOException {
 
         String nextLine;
-        StringBuilder readString = new StringBuilder("");
+        StringBuilder readString = new StringBuilder();
 
-        BufferedReader br = null;
+        BufferedReader br;
 
         //Try to read - null URI will throw error
         try {

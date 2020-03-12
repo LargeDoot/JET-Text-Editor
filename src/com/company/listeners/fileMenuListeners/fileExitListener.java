@@ -8,11 +8,13 @@ import java.awt.event.ActionListener;
 
 public class fileExitListener implements ActionListener {
 
-    EditorWindow window;
+    final EditorWindow window;
+    final boolean checkSave;
 
-    public fileExitListener(EditorWindow editorWindow) {
+    public fileExitListener(EditorWindow editorWindow, boolean checkSave) {
 
         this.window = editorWindow;
+        this.checkSave = checkSave;
 
     }
 
@@ -22,7 +24,7 @@ public class fileExitListener implements ActionListener {
         String currentText = window.getText();
         String savedText = window.getCurrentFile().getTextContents();
 
-        if (!currentText.equals(savedText)) {
+        if (!currentText.equals(savedText) && checkSave) {
 
             new SaveDialog(window);
 
