@@ -79,13 +79,15 @@ public class ReaderWriter {
 
             br.close();
 
+            JETFile createdFile = new JETFile(readString.toString(), writeToURI);
+
+            editorWindow.setFile(createdFile);
+
         } catch (NullPointerException e) {
             System.err.println("User cancelled open operation.");
         }
 
-        JETFile createdFile = new JETFile(readString.toString(), writeToURI);
 
-        editorWindow.setFile(createdFile);
 
 
     }

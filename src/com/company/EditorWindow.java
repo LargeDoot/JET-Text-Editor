@@ -1,7 +1,9 @@
 package com.company;
 
 import com.company.listeners.editMenuListeners.editCopyListener;
+import com.company.listeners.editMenuListeners.editFindListener;
 import com.company.listeners.editMenuListeners.editPasteListener;
+import com.company.listeners.editMenuListeners.editReplaceListener;
 import com.company.listeners.fileMenuListeners.*;
 import com.company.listeners.formatMenuListeners.formatFontListener;
 import com.company.listeners.formatMenuListeners.formatWrapListener;
@@ -179,6 +181,9 @@ public class EditorWindow extends JFrame {
         toolbarZoomOutButton.addActionListener(new zoomOutListener(this));
 
         toolbar = new JToolBar();
+
+        toolbar.setMaximumSize(new Dimension(1000, 20));
+
         toolbar.add(toolbarOpenButton);
         toolbar.add(toolbarSaveButton);
         toolbar.add(toolbarZoomInButton);
@@ -227,8 +232,8 @@ public class EditorWindow extends JFrame {
 
         editCopy.addActionListener(new editCopyListener(this));
         editPaste.addActionListener(new editPasteListener(this));
-//        editFind.addActionListener(new fileExitListener(this));
-//        editFind.addActionListener(new fileExitListener(this));
+        editFind.addActionListener(new editFindListener(this));
+        editReplace.addActionListener(new editReplaceListener(this));
 
 
         formatWordWrap = new JCheckBoxMenuItem("Word Wrap", true);

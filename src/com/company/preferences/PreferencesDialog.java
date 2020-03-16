@@ -65,7 +65,7 @@ public class PreferencesDialog {
         container.add(fontList);
 
         //Add font style selector components
-        fontStyleLabel = new JLabel("Font Selector");
+        fontStyleLabel = new JLabel("Font Style Selector");
         container.add(fontStyleLabel);
 
         //Create a combo box model to allow changes to the contents while the program runs

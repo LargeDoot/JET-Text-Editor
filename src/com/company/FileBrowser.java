@@ -11,7 +11,7 @@ public class FileBrowser extends JFrame {
 
     public String getURI() {
 
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser("C:\\Users\\Ethan\\IdeaProjects\\JET-Text-Editor");
         String filePath = null;
 
         int i = fileChooser.showOpenDialog(this);
