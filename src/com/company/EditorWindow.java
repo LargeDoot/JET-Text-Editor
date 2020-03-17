@@ -1,22 +1,20 @@
 package com.company;
 
-import com.company.listeners.editMenuListeners.editCopyListener;
-import com.company.listeners.editMenuListeners.editFindListener;
-import com.company.listeners.editMenuListeners.editPasteListener;
-import com.company.listeners.editMenuListeners.editReplaceListener;
+import com.company.listeners.editMenuListeners.*;
 import com.company.listeners.fileMenuListeners.*;
-import com.company.listeners.formatMenuListeners.formatFontListener;
-import com.company.listeners.formatMenuListeners.formatWrapListener;
-import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomInListener;
-import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomOutListener;
-import com.company.listeners.viewMenuListeners.zoomMenuListeners.zoomResetListener;
+import com.company.listeners.formatMenuListeners.*;
+import com.company.listeners.helpListener;
+import com.company.listeners.viewMenuListeners.zoomMenuListeners.*;
 import com.company.listeners.windowListeners.textKeyListener;
 import com.company.listeners.windowListeners.textMouseListener;
 import com.company.listeners.windowListeners.windowCloseListener;
-import com.company.preferences.TextPrefs;
 import com.company.listeners.viewMenuListeners.viewToolbarToggleListener;
 
+import com.company.preferences.TextPrefs;
+
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 @SuppressWarnings("DuplicatedCode")
@@ -31,8 +29,6 @@ public class EditorWindow extends JFrame {
 
     private JMenuBar menuBar;
 
-    private final JLabel wordCount;
-    private final JLabel charCount;
     private final JLabel lineNum;
     private final JLabel lineColumn;
     private final JLabel zoomLevelLabel;
@@ -49,7 +45,7 @@ public class EditorWindow extends JFrame {
 
     public EditorWindow() {
 
-        super(" Jet Editor");
+        super(" Jet Editor | 'Untitled.txt'");
 
         addWindowListener(new windowCloseListener(this));
 
@@ -89,27 +85,30 @@ public class EditorWindow extends JFrame {
         statusBar = new JPanel();
         statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.LINE_AXIS));
 
-        wordCount = new JLabel(" Words: 0 \t ");
-        charCount = new JLabel("Chars: 0 ");
-        lineNum = new JLabel(" Ln: 0 \t ");
-        lineColumn = new JLabel("Col: 0 ");
+        Font statusFont = new Font("Segoe UI", Font.PLAIN, 12);
+
+        lineNum = new JLabel(" Ln 0, \t ");
+        lineNum.setFont(statusFont);
+        lineNum.setBorder(new EmptyBorder(4, 0, 4, 0));
+
+        lineColumn = new JLabel("Col 0 ");
+        lineColumn.setFont(statusFont);
+
         zoomLevelLabel = new JLabel(" 100% ");
-        JLabel charSet = new JLabel(" UTF-8 ");
+        zoomLevelLabel.setFont(statusFont);
+
+        JLabel charSet = new JLabel(" UTF-8 \t\t");
+        charSet.setFont(statusFont);
+
 
         //Create separators for use in the bar
         JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
         JSeparator separator2 = new JSeparator(SwingConstants.VERTICAL);
         JSeparator separator3 = new JSeparator(SwingConstants.VERTICAL);
-        JSeparator separator4 = new JSeparator(SwingConstants.VERTICAL);
         separator.setMaximumSize(new Dimension(0, 20));
         separator2.setMaximumSize(new Dimension(0, 20));
         separator3.setMaximumSize(new Dimension(0, 20));
-        separator4.setMaximumSize(new Dimension(0, 20));
 
-
-        statusBar.add(wordCount);
-        statusBar.add(charCount);
-        statusBar.add(separator4);
         statusBar.add(Box.createHorizontalGlue());
         statusBar.add(separator3);
         statusBar.add(lineNum);
@@ -161,11 +160,11 @@ public class EditorWindow extends JFrame {
 
         //Create icons for toolbar
         Icon openIcon, saveIcon, exitIcon, zoomInIcon, zoomOutIcon;
-        openIcon = new ImageIcon("src/com/company/resources/OpenIcon40x40.png");
-        saveIcon = new ImageIcon("src/com/company/resources/SaveIcon40x40.png");
-        exitIcon = new ImageIcon("src/com/company/resources/ExitIcon40x40.png");
-        zoomInIcon = new ImageIcon("src/com/company/resources/ZoomInIcon40x40.png");
-        zoomOutIcon = new ImageIcon("src/com/company/resources/ZoomOutIcon40x40.png");
+        openIcon = new ImageIcon("src/com/company/resources/OpenIcon20x20.png");
+        saveIcon = new ImageIcon("src/com/company/resources/SaveIcon20x20.png");
+        exitIcon = new ImageIcon("src/com/company/resources/ExitIcon20x20.png");
+        zoomInIcon = new ImageIcon("src/com/company/resources/ZoomInIcon20x20.png");
+        zoomOutIcon = new ImageIcon("src/com/company/resources/ZoomOutIcon20x20.png");
 
         //Setup toolbar and buttons for toolbar
         toolbarOpenButton = new JButton(openIcon);
@@ -207,11 +206,11 @@ public class EditorWindow extends JFrame {
         //Setup menus and menu buttons for a menubar
         menuBar = new JMenuBar();
 
-        menuFile = new JMenu("File");
-        menuEdit = new JMenu("Edit");
-        menuFormat = new JMenu("Format");
-        menuView = new JMenu("View");
-        menuHelp = new JMenu("Help");
+        menuFile = new JMenu("File  ");
+        menuEdit = new JMenu("Edit  ");
+        menuFormat = new JMenu("Format  ");
+        menuView = new JMenu("View  ");
+        menuHelp = new JMenu("Help  ");
 
         fileNew = new JMenuItem("New");
         fileSave = new JMenuItem("Save");
@@ -260,6 +259,8 @@ public class EditorWindow extends JFrame {
         viewToolbarToggle.addItemListener(new viewToolbarToggleListener(this));
 
         helpHelp = new JMenuItem("Help");
+
+        helpHelp.addActionListener(new helpListener());
 
         fileSeparator1 = new JSeparator();
         editSeparator1 = new JSeparator();
@@ -381,16 +382,8 @@ public class EditorWindow extends JFrame {
 
     }
 
-    public JLabel getWordCount() {
-        return wordCount;
-    }
-
     public JLabel getLineColumn() {
         return lineColumn;
-    }
-
-    public JLabel getCharCount() {
-        return charCount;
     }
 
     public JLabel getLineNum() {

@@ -1,22 +1,21 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ReplaceDialog extends FindDialog {
 
-    JPanel replaceBoxContainer;
-    JLabel replaceLabel;
+    final JPanel replaceBoxContainer;
 
-    JTextField replaceBox;
-    JButton replaceButton;
+    final JTextField replaceBox;
+    final JButton replaceButton;
 
     public ReplaceDialog(EditorWindow window) {
         super(window);
 
         findReplace.setTitle("Find and Replace");
 
-        //Create a container to house the replace box and associated label. This will be added to the searchGrid container to display below the find box.
+        //Create a container to house the replace box and associated label. This will be added to the searchGrid
+        // container to display below the find box.
         replaceBoxContainer = new JPanel();
 
         //Create the replace field

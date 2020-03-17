@@ -152,7 +152,7 @@ public class FindDialog {
     /**
      * Getter
      *
-     * @return the search box containging the text to be searched for
+     * @return the search box containing the text to be searched for
      */
     public JTextField getSearchBox() {
 
@@ -168,23 +168,11 @@ public class FindDialog {
      */
     public boolean getDirection() {
 
-        if (upRadio.isSelected()) {
-            return true;
-
-        } else {
-            return false;
-
-        }
+        return upRadio.isSelected();
     }
 
     public boolean isCaseSensitive() {
 
-        if (matchCase.isSelected()) {
-            return true;
-
-        } else {
-            return false;
-
-        }
+        return matchCase.isSelected();
     }
 }

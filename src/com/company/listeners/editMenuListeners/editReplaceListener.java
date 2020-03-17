@@ -1,7 +1,6 @@
 package com.company.listeners.editMenuListeners;
 
 import com.company.EditorWindow;
-import com.company.FindDialog;
 import com.company.ReplaceDialog;
 
 import java.awt.event.ActionEvent;

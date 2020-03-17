@@ -22,8 +22,8 @@ public class findButtonListener implements ActionListener {
 
     final JTextArea textArea;
 
-    Highlighter highlighter;
-    Highlighter.HighlightPainter painter;
+    final Highlighter highlighter;
+    final Highlighter.HighlightPainter painter;
 
     boolean direction, isCaseSensitive;
     int pos;
@@ -61,7 +61,7 @@ public class findButtonListener implements ActionListener {
         //This code is a slightly modified version of the above
 
         String searchItem = searchField.getText();
-        String currentSearch = null;
+        String currentSearch;
         int searchItemLength = searchItem.length();
 
         if (!isCaseSensitive) {
@@ -71,7 +71,7 @@ public class findButtonListener implements ActionListener {
 
         textArea.requestFocusInWindow();
 
-        if (searchItem != null && searchItemLength > 0) {
+        if (searchItemLength > 0) {
 
             Document document = textArea.getDocument();
 
@@ -146,18 +146,6 @@ public class findButtonListener implements ActionListener {
 //            window.requestFocus();
 
         }
-    }
-
-    private void setCaratPos(int searchItemLength) {
-
-        if (!direction) {
-            textArea.setCaretPosition(pos + searchItemLength);
-
-        } else {
-
-            textArea.setCaretPosition(pos - searchItemLength);
-        }
-
     }
 
     private boolean isWithinDoc(int searchItemLength, Document document) {

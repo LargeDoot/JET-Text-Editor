@@ -26,5 +26,6 @@ public class viewToolbarToggleListener implements ItemListener {
         window.getToolbar().setVisible(result);
         window.getPrefs().setShowToolbar(result);
 
+
     }
 }

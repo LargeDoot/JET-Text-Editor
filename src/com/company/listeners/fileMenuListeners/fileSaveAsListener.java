@@ -16,7 +16,7 @@ public class fileSaveAsListener extends fileSaveListener implements ActionListen
     @Override
     void saveFile(JETFile file) {
 
-        String saveAddress = "";
+        String saveAddress;
         String originalAddress = file.getFileLocation();
 
         //Open a new file browser to get a save URI
