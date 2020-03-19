@@ -22,7 +22,7 @@ public class fileOpenListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        String readLocation = new FileBrowser().getURI();
+        String readLocation = new FileBrowser("Open").getURI();
         new ReaderWriter(readLocation, window);
 
         if (readLocation != null) {

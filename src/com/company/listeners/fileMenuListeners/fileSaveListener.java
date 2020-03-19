@@ -64,7 +64,7 @@ public class fileSaveListener implements ActionListener {
         if (file.getFileLocation().equals("Untitled")) {
 
             //Open a new file browser to get a save URI
-            saveAddress = new FileBrowser().getURI();
+            saveAddress = new FileBrowser("Save").getURI();
 
             //Set the file's location to the chosen URI as long as the user didn't cancel.
             if (saveAddress != null) {

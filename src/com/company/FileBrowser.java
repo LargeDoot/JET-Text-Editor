@@ -6,19 +6,26 @@ import java.io.File;
 
 public class FileBrowser extends JFrame {
 
-    public FileBrowser() {
+    final String title;
+
+    public FileBrowser(String title) {
+
+        this.title = title;
 
     }
 
     public String getURI() {
 
         JFileChooser fileChooser = new JFileChooser("C:\\Users\\Ethan\\IdeaProjects\\JET-Text-Editor");
+        fileChooser.setDialogTitle(title);
+
         String filePath = null;
 
         fileChooser.setFileFilter(new FileNameExtensionFilter("Text Document (*.txt)", "txt"));
         fileChooser.setSelectedFile(new File("Untitled.txt"));
 
         int i = fileChooser.showOpenDialog(this);
+
         if (i == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             filePath = file.getPath();

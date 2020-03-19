@@ -20,7 +20,8 @@ public class fileSaveAsListener extends fileSaveListener implements ActionListen
         String originalAddress = file.getFileLocation();
 
         //Open a new file browser to get a save URI
-        saveAddress = new FileBrowser().getURI();
+        saveAddress = new FileBrowser("Save As").getURI();
+
 
         //Set the file's location to the chosen URI as long as the user didn't cancel.
         if (saveAddress != null) {
