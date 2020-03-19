@@ -1,7 +1,5 @@
 package com.company.listeners;
 
-import com.company.EditorWindow;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

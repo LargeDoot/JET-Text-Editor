@@ -2,14 +2,12 @@ package com.company.listeners.findReplaceListeners;
 
 import com.company.EditorWindow;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class findReplaceCloseListener implements WindowListener {
 
-    EditorWindow window;
+    final EditorWindow window;
 
     public findReplaceCloseListener(EditorWindow window) {
 

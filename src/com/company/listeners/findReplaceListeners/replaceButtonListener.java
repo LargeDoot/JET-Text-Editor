@@ -1,16 +1,13 @@
 package com.company.listeners.findReplaceListeners;
 
 import com.company.EditorWindow;
-import com.company.FindDialog;
 import com.company.ReplaceDialog;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
-import javax.swing.text.Document;
 import javax.swing.text.Highlighter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
