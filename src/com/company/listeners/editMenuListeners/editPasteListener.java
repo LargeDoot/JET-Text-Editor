@@ -15,12 +15,23 @@ public class editPasteListener implements ActionListener {
     final EditorWindow window;
     JTextArea textArea;
 
+    /**
+     * Constructor to create the listener.
+     *
+     * @param window the parent Editor Window
+     */
     public editPasteListener(EditorWindow window) {
 
         this.window = window;
 
     }
 
+    /**
+     * Code to paste text from the system clipboard into the parent editor window's text area. If text is selected, then
+     * the selected text will be replaced with the pasted text.
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -32,6 +43,7 @@ public class editPasteListener implements ActionListener {
         textArea = window.getTextArea();
 
         try {
+            //Try to get text from the clipboard
             textToPaste = (String) Toolkit.getDefaultToolkit()
                     .getSystemClipboard().getData(DataFlavor.stringFlavor);
 
@@ -43,6 +55,7 @@ public class editPasteListener implements ActionListener {
             System.err.println("ERROR - IOException while trying to paste!");
         }
 
+        //If text is selected, paste the text and replace the selected text, otherwise insert it after the carat
         if (textArea.getSelectedText() != null) {
 
             textArea.replaceSelection(textToPaste);

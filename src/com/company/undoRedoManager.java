@@ -1,8 +1,7 @@
 package com.company;
 
-import com.sun.jmx.mbeanserver.JmxMBeanServer;
-
-import javax.swing.*;
+import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.CannotRedoException;
@@ -14,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class undoRedoManager {
 
-    final EditorWindow window;
     final JTextArea textArea;
 
     final JMenuItem undoButton, redoButton;
@@ -22,41 +20,33 @@ public class undoRedoManager {
     final UndoManager undoManager = new UndoManager();
 
     public undoRedoManager(EditorWindow window, JMenuItem undoButton, JMenuItem redoButton) {
-        this.window = window;
         this.textArea = window.getTextArea();
 
         this.undoButton = undoButton;
         this.redoButton = redoButton;
 
 
-        textArea.getDocument().addUndoableEditListener(
-                new UndoableEditListener() {
-                    public void undoableEditHappened(UndoableEditEvent e) {
-                        undoManager.addEdit(e.getEdit());
-                        updateButtons();
-                    }
-                });
-
-        undoButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    undoManager.undo();
-                } catch (CannotRedoException cre) {
-                    cre.printStackTrace();
-                }
-                updateButtons();
-            }
+        textArea.getDocument().addUndoableEditListener(e -> {
+            undoManager.addEdit(e.getEdit());
+            updateButtons();
         });
 
-        redoButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    undoManager.redo();
-                } catch (CannotRedoException cre) {
-                    cre.printStackTrace();
-                }
-                updateButtons();
+        undoButton.addActionListener(e -> {
+            try {
+                undoManager.undo();
+            } catch (CannotRedoException cre) {
+                cre.printStackTrace();
             }
+            updateButtons();
+        });
+
+        redoButton.addActionListener(e -> {
+            try {
+                undoManager.redo();
+            } catch (CannotRedoException cre) {
+                cre.printStackTrace();
+            }
+            updateButtons();
         });
 
 

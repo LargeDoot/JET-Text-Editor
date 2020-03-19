@@ -28,14 +28,18 @@ public class fileSaveAsListener extends fileSaveListener implements ActionListen
             file.setFileLocation(saveAddress);
         }
 
+
         //If the file now has a new save address, write the data (i.e if user didnt cancel file browser).
-        if (originalAddress.equals(saveAddress)) {
+        if (!originalAddress.equals(saveAddress) && saveAddress != null) {
 
             //Set the text contents of the file to that inside the main textarea.
             file.setTextContents(window.getText());
 
             //Write the data
             new ReaderWriter(file);
+
+            //Set window title
+            window.setTitle(String.format(" JET \t | \t %s", file.getFileLocation()));
 
         }
 

@@ -74,7 +74,7 @@ public class fileSaveListener implements ActionListener {
         }
 
         //If the file now has a save address, write the data (i.e if user didnt cancel file browser).
-        if (!"Untitled".equals(saveAddress)) {
+        if (!"Untitled".equals(saveAddress) && saveAddress != null) {
 
             //Set the text contents of the file to that inside the main textarea.
             file.setTextContents(window.getText());

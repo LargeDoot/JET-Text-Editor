@@ -280,7 +280,8 @@ public class EditorWindow extends JFrame {
         fileNew.addActionListener(new fileNewListener());
         fileOpen.addActionListener(new fileOpenListener(this));
         fileSave.addActionListener(new fileSaveListener(this));
-        fileSaveAs.addActionListener(new fileSaveAsListener(this));
+        fileSaveListener saveAsListener = new fileSaveAsListener(this);
+        fileSaveAs.addActionListener(saveAsListener);
         fileExit.addActionListener(new fileExitListener(this, true));
 
         //Create edit menu items

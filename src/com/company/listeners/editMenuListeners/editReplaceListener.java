@@ -10,15 +10,26 @@ public class editReplaceListener implements ActionListener {
 
     final EditorWindow window;
 
+    /**
+     * Constructor to create the listener.
+     *
+     * @param window the parent Editor Window
+     */
     public editReplaceListener(EditorWindow window) {
 
         this.window = window;
 
     }
 
+    /**
+     * Method to open a new replace dialog.
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //Simply create a replace dialog
         new ReplaceDialog(window);
 
     }

@@ -7,12 +7,15 @@ import java.awt.event.ActionListener;
 
 public class fileNewListener implements ActionListener {
 
-    public fileNewListener() {
-    }
-
+    /**
+     * A method to open a new EditorWindow
+     *
+     * @param actionEvent event
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
+        //Simply opens a new Editor Window
         new EditorWindow().setVisible(true);
 
     }
