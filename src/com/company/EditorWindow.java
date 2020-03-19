@@ -51,7 +51,7 @@ public class EditorWindow extends JFrame {
 
         addWindowListener(new windowCloseListener(this));
 
-        //Add the system's look anf feel to make the window look normal in the current OS
+        //Add the system's look and feel to make the window look normal in the current OS
         //Set the font size to the system's default "TextField" font size (otherwise it is very small on some screens)
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -146,6 +146,10 @@ public class EditorWindow extends JFrame {
         setLocationRelativeTo(null);
     }
 
+
+    /**
+     * Method to set the preferences when the application starts
+     */
     private void setPrefFormatting() {
 
         String fontName = windowPreferences.getFontName();
@@ -155,6 +159,9 @@ public class EditorWindow extends JFrame {
 
     }
 
+    /**
+     * Method to set up the toolbar
+     */
     private void initToolbar() {
 
         JButton toolbarOpenButton, toolbarSaveButton, toolbarExitButton;
@@ -175,16 +182,19 @@ public class EditorWindow extends JFrame {
         toolbarZoomInButton = new JButton(zoomInIcon);
         toolbarZoomOutButton = new JButton(zoomOutIcon);
 
+        //Add action listeners
         toolbarOpenButton.addActionListener(new fileOpenListener(this));
         toolbarSaveButton.addActionListener(new fileSaveListener(this));
         toolbarExitButton.addActionListener(new fileExitListener(this, true));
         toolbarZoomInButton.addActionListener(new zoomInListener(this));
         toolbarZoomOutButton.addActionListener(new zoomOutListener(this));
 
+        //Create the toolbar
         toolbar = new JToolBar();
 
         toolbar.setMaximumSize(new Dimension(1000, 20));
 
+        //Add things to the toolbar
         toolbar.add(toolbarOpenButton);
         toolbar.add(toolbarSaveButton);
         toolbar.add(toolbarZoomInButton);
@@ -193,6 +203,9 @@ public class EditorWindow extends JFrame {
         toolbar.add(toolbarExitButton);
     }
 
+    /**
+     * Method to set up the menuBar
+     */
     private void initMenuBar() {
 
         JMenu menuFile, menuEdit, menuFormat, menuView, menuHelp;
@@ -221,7 +234,7 @@ public class EditorWindow extends JFrame {
         menuView.setMnemonic('v');
         menuHelp.setMnemonic('h');
 
-
+        //Create file menu items
         fileNew = new JMenuItem("New");
         fileSave = new JMenuItem("Save");
         fileSaveAs = new JMenuItem("Save As");
@@ -364,6 +377,9 @@ public class EditorWindow extends JFrame {
 
     }
 
+    /**
+     * Method to set up the scroll pane
+     */
     private void initScrollPane() {
 
         scrollPane = new JScrollPane(textArea);
@@ -375,6 +391,9 @@ public class EditorWindow extends JFrame {
 
     }
 
+    /**
+     * Method to set up the text area
+     */
     private void initTextArea() {
         textArea = new JTextArea(50, 50);
         textArea.setLineWrap(true);
@@ -382,13 +401,29 @@ public class EditorWindow extends JFrame {
         textArea.addMouseListener(new textMouseListener(this));
     }
 
-    public String getText() {
-        return textArea.getText();
+    /**
+     * Method to set all the misc preferences such as zoom when the application starts
+     */
+    private void setMiscPrefs() {
+
+        //Set zoom level
+        setZoomLevel(windowPreferences.getZoomAmount());
+
+        //Set the toolbar visibility
+        boolean toolBarVisible = windowPreferences.isShowToolbar();
+        toolbar.setVisible(toolBarVisible);
+        viewToolbarToggle.setSelected(toolBarVisible);
+
+        //Set the text wrapping
+        boolean textWrapped = windowPreferences.isWrapText();
+        setTextWrap(textWrapped);
+        formatWordWrap.setSelected(textWrapped);
+
     }
 
-    public void setFile(JETFile file) {
-        currentFile = file;
-        textArea.setText(file.getTextContents());
+    //Setters and getters
+    public String getText() {
+        return textArea.getText();
     }
 
     public JETFile getCurrentFile() {
@@ -404,52 +439,11 @@ public class EditorWindow extends JFrame {
     }
 
     public void setWindowFont(Font windowFont) {
+
+        //Set the window font, set the text area font to the new one, and update the fontSize
         this.windowFont = windowFont;
         this.textArea.setFont(windowFont);
         this.fontSize = windowFont.getSize() - zoomLevel;
-    }
-
-    public void setTextWrap(Boolean wrap) {
-
-        this.textArea.setLineWrap(wrap);
-
-    }
-
-    public JToolBar getToolbar() {
-
-        return toolbar;
-
-    }
-
-    public int getZoomLevel() {
-
-        return zoomLevel;
-
-    }
-
-    public void setZoomLevel(int zoomLevel) {
-
-        this.zoomLevel = zoomLevel;
-        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
-
-        //Set label to the correct zoom level
-        String zoomLevelText = String.format(" %s%% ", (100 + zoomLevel));
-        zoomLevelLabel.setText(zoomLevelText);
-
-    }
-
-    private void setMiscPrefs() {
-
-        setZoomLevel(windowPreferences.getZoomAmount());
-
-        boolean toolBarVisible = windowPreferences.isShowToolbar();
-        toolbar.setVisible(toolBarVisible);
-        viewToolbarToggle.setSelected(toolBarVisible);
-
-        boolean textWrapped = windowPreferences.isWrapText();
-        setTextWrap(textWrapped);
-        formatWordWrap.setSelected(textWrapped);
-
     }
 
     public JLabel getLineColumn() {
@@ -463,4 +457,43 @@ public class EditorWindow extends JFrame {
     public JTextArea getTextArea() {
         return textArea;
     }
+
+    public JToolBar getToolbar() {
+        return toolbar;
+    }
+
+    public int getZoomLevel() {
+        return zoomLevel;
+    }
+
+    public void setZoomLevel(int zoomLevel) {
+
+        //Set the size of the font based upon the zoom level
+        this.zoomLevel = zoomLevel;
+        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
+
+        //Set label to the correct zoom level
+        String zoomLevelText = String.format(" %s%% ", (100 + zoomLevel));
+        zoomLevelLabel.setText(zoomLevelText);
+
+    }
+
+    public void setFile(JETFile file) {
+        currentFile = file;
+        textArea.setText(file.getTextContents());
+    }
+
+    public void setTextWrap(Boolean wrap) {
+
+        this.textArea.setLineWrap(wrap);
+
+    }
+
+
+
+
+
+
+
+
 }
