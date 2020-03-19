@@ -16,6 +16,8 @@ import com.company.preferences.TextPrefs;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("DuplicatedCode")
 public class EditorWindow extends JFrame {
@@ -149,7 +151,7 @@ public class EditorWindow extends JFrame {
         String fontName = windowPreferences.getFontName();
         int fontSize = windowPreferences.getFontSize();
 
-        setWindowFont( new Font( fontName, Font.PLAIN, fontSize) );
+        setWindowFont(new Font(fontName, Font.PLAIN, fontSize));
 
     }
 
@@ -212,59 +214,123 @@ public class EditorWindow extends JFrame {
         menuView = new JMenu("View  ");
         menuHelp = new JMenu("Help  ");
 
+        //Set menu mnemonics
+        menuFile.setMnemonic('f');
+        menuEdit.setMnemonic('e');
+        menuFormat.setMnemonic('o');
+        menuView.setMnemonic('v');
+        menuHelp.setMnemonic('h');
+
+
         fileNew = new JMenuItem("New");
         fileSave = new JMenuItem("Save");
         fileSaveAs = new JMenuItem("Save As");
         fileOpen = new JMenuItem("Open");
         fileExit = new JMenuItem("Exit");
 
+        //Add mnemonics to the menu items
+        fileNew.setMnemonic('n');
+        fileSave.setMnemonic('s');
+        fileSaveAs.setMnemonic('a');
+        fileOpen.setMnemonic('o');
+        fileExit.setMnemonic('e');
+
+        //Set shortcuts
+        fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        fileSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_DOWN_MASK));
+        fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+
+        //Add action listeners
         fileNew.addActionListener(new fileNewListener());
         fileOpen.addActionListener(new fileOpenListener(this));
         fileSave.addActionListener(new fileSaveListener(this));
         fileSaveAs.addActionListener(new fileSaveAsListener(this));
         fileExit.addActionListener(new fileExitListener(this, true));
 
+        //Create edit menu items
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");
         editFind = new JMenuItem("Find");
         editReplace = new JMenuItem("Replace");
 
+        //Add mnemonics to the menu items
+        editCopy.setMnemonic('c');
+        editPaste.setMnemonic('o');
+        editFind.setMnemonic('f');
+        editReplace.setMnemonic('r');
+
+        //Set shortcuts
+        editCopy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        editPaste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        editFind.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        editReplace.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+
+        //Add action listeners
         editCopy.addActionListener(new editCopyListener(this));
         editPaste.addActionListener(new editPasteListener(this));
         editFind.addActionListener(new editFindListener(this));
         editReplace.addActionListener(new editReplaceListener(this));
 
-
+        //Create format menu items
         formatWordWrap = new JCheckBoxMenuItem("Word Wrap", true);
         formatFont = new JMenuItem("Font...");
 
+        //Add mnemonics to the menu items
+        formatWordWrap.setMnemonic('w');
+        formatFont.setMnemonic('f');
+
+        //Add action listeners to the zoom and format buttons
         formatWordWrap.addItemListener(new formatWrapListener(this));
         formatFont.addActionListener(new formatFontListener(this));
 
+        //Create view menu items
         viewZoom = new JMenu("Zoom");
         zoomIn = new JMenuItem("Zoom In");
         zoomOut = new JMenuItem("Zoom Out");
         zoomReset = new JMenuItem("Reset to default");
+
         viewToolbarToggle = new JCheckBoxMenuItem("Show toolbar", true);
 
-        //Add action listeners to the zoom buttons
+        //Add mnemonics to the menu items
+        viewZoom.setMnemonic('z');
+        zoomIn.setMnemonic('i');
+        zoomOut.setMnemonic('o');
+        zoomReset.setMnemonic('r');
+        viewToolbarToggle.setMnemonic('t');
+
+
+        //Add action listeners
         zoomIn.addActionListener(new zoomInListener(this));
         zoomOut.addActionListener(new zoomOutListener(this));
         zoomReset.addActionListener(new zoomResetListener(this));
 
-        viewZoom.add(zoomIn);
-        viewZoom.add(zoomOut);
-        viewZoom.add(zoomReset);
-
         viewToolbarToggle.addItemListener(new viewToolbarToggleListener(this));
 
+        //Create help menu item
         helpHelp = new JMenuItem("Help");
 
+        //Add mnemonic to the menu item
+        helpHelp.setMnemonic('h');
+
+        //Add action listener
         helpHelp.addActionListener(new helpListener());
 
+        //Create some separators
         fileSeparator1 = new JSeparator();
         editSeparator1 = new JSeparator();
 
+        //Add everything to the menu
         menuFile.add(fileNew);
         menuFile.add(fileSave);
         menuFile.add(fileSaveAs);
@@ -280,6 +346,10 @@ public class EditorWindow extends JFrame {
 
         menuFormat.add(formatWordWrap);
         menuFormat.add(formatFont);
+
+        viewZoom.add(zoomIn);
+        viewZoom.add(zoomOut);
+        viewZoom.add(zoomReset);
 
         menuView.add(viewZoom);
         menuView.add(viewToolbarToggle);
