@@ -20,7 +20,7 @@ public class SaveDialog {
     public SaveDialog(EditorWindow window) {
 
         checkSave = new JDialog(window, true);
-        checkSave.setTitle("Font Preferences");
+        checkSave.setTitle("Java Editor for Text");
 
         JPanel buttonContainer = new JPanel();
         JPanel container = new JPanel();

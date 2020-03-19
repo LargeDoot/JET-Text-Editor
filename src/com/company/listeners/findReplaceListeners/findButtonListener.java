@@ -1,4 +1,4 @@
-package com.company.listeners.findListeners;
+package com.company.listeners.findReplaceListeners;
 
 import com.company.EditorWindow;
 import com.company.FindDialog;
@@ -111,14 +111,15 @@ public class findButtonListener implements ActionListener {
 
                 textArea.scrollRectToVisible(viewRect);
 
-//                setCaratPos(searchItemLength);
-//                textArea.moveCaretPosition(pos);
-
                 try {
                     highlighter.addHighlight(pos, pos + searchItemLength, painter);
                 } catch (BadLocationException ex) {
                     ex.printStackTrace();
                 }
+
+                //Set the start and end position of the found string for use in replacing
+                int[] foundPosition = {pos, pos + searchItemLength};
+                dialog.setCurrentFindSelection(foundPosition);
 
                 if (!direction) {
                     pos += searchItemLength;

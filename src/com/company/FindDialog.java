@@ -1,6 +1,7 @@
 package com.company;
 
-import com.company.listeners.findListeners.findButtonListener;
+import com.company.listeners.findReplaceListeners.findButtonListener;
+import com.company.listeners.findReplaceListeners.findReplaceCloseListener;
 import com.company.listeners.windowListeners.windowCloseCancelListener;
 
 import javax.swing.*;
@@ -20,7 +21,10 @@ public class FindDialog {
     final JRadioButton upRadio, downRadio;
     final ButtonGroup directionGroup;
 
-    final JPanel container, searchContainer, buttonContainer, checkBoxContainer, leftGridContainer, rightGridContainer, searchGrid;
+    final JPanel container, searchContainer, buttonContainer, checkBoxContainer, leftGridContainer,
+            rightGridContainer, searchGrid;
+
+    int[] currentFindSelection;
 
     /**
      * Code for the find and replace dialog, containing:
@@ -37,6 +41,9 @@ public class FindDialog {
         //Initialise the dialog
         findReplace = new JDialog(window, false);
         findReplace.setTitle("Find");
+
+        //Add a windowListener to remove highlighting when closed
+        findReplace.addWindowListener(new findReplaceCloseListener(window));
 
         //Initialise all the containers used for positioning in the dialog
         container = new JPanel();
@@ -174,5 +181,26 @@ public class FindDialog {
     public boolean isCaseSensitive() {
 
         return matchCase.isSelected();
+    }
+
+    public int[] getCurrentFindSelection() throws NullPointerException {
+
+        if (currentFindSelection == null) {
+
+            throw new NullPointerException("The current selection has not yet been set.");
+
+        } else {
+            return currentFindSelection;
+        }
+
+    }
+
+    public void setCurrentFindSelection(int[] currentFindSelection) {
+
+        if (currentFindSelection.length == 2) {
+            this.currentFindSelection = currentFindSelection;
+
+        }
+
     }
 }

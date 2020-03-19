@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.listeners.findReplaceListeners.replaceButtonListener;
+
 import javax.swing.*;
 
 public class ReplaceDialog extends FindDialog {
@@ -23,6 +25,7 @@ public class ReplaceDialog extends FindDialog {
 
         //Create the new replace button
         replaceButton = new JButton("Replace");
+        replaceButton.addActionListener(new replaceButtonListener(window, this));
 
         //Create and set a box layout for the new container
         BoxLayout replaceLayout = new BoxLayout(replaceBoxContainer, BoxLayout.LINE_AXIS);
@@ -42,6 +45,12 @@ public class ReplaceDialog extends FindDialog {
         rightGridContainer.add(replaceButton);
         rightGridContainer.add(cancelButton);
         rightGridContainer.add(Box.createVerticalGlue());
+
+    }
+
+    public String getReplaceText() {
+
+        return replaceBox.getText();
 
     }
 }
