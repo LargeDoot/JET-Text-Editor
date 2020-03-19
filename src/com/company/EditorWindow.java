@@ -31,6 +31,8 @@ public class EditorWindow extends JFrame {
 
     private JMenuBar menuBar;
 
+    private JMenuItem editUndo, editRedo;
+
     private final JLabel lineNum;
     private final JLabel lineColumn;
     private final JLabel zoomLevelLabel;
@@ -75,12 +77,14 @@ public class EditorWindow extends JFrame {
         //Initialize the menu bar
         initMenuBar();
 
+        //Add and set the menubar
         add(menuBar);
         setJMenuBar(menuBar);
 
         //Initialize the tool bar
         initToolbar();
 
+        //Add the toolBar
         add(toolbar, BorderLayout.NORTH);
 
         //Add status bar to bottom of the window
@@ -130,6 +134,10 @@ public class EditorWindow extends JFrame {
         //Initialise the scroll area
         initScrollPane();
 
+        //Add an UndoManager
+        createUndoManager();
+
+        //Add the scroll pane
         add(scrollPane, BorderLayout.CENTER);
 
         //Set the close operation to dispose of the window when closed, allowing for multiple windows
@@ -144,6 +152,14 @@ public class EditorWindow extends JFrame {
 
         //Make the window open in the center of the screen (not the top left)
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * creates a new resetUndoManager object
+     */
+    private void createUndoManager() {
+        //Create an undoRedoManager object to add functionality to the buttons
+        new undoRedoManager(this, editUndo, editRedo);
     }
 
 
@@ -268,18 +284,26 @@ public class EditorWindow extends JFrame {
         fileExit.addActionListener(new fileExitListener(this, true));
 
         //Create edit menu items
+        editUndo = new JMenuItem("Undo");
+        editRedo = new JMenuItem("Redo");
         editCopy = new JMenuItem("Copy");
         editPaste = new JMenuItem("Paste");
         editFind = new JMenuItem("Find");
         editReplace = new JMenuItem("Replace");
 
         //Add mnemonics to the menu items
+        editUndo.setMnemonic('u');
+        editRedo.setMnemonic('e');
         editCopy.setMnemonic('c');
         editPaste.setMnemonic('o');
         editFind.setMnemonic('f');
         editReplace.setMnemonic('r');
 
         //Set shortcuts
+        editUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        editRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         editCopy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         editPaste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
@@ -351,6 +375,8 @@ public class EditorWindow extends JFrame {
         menuFile.add(fileSeparator1);
         menuFile.add(fileExit);
 
+        menuEdit.add(editUndo);
+        menuEdit.add(editRedo);
         menuEdit.add(editCopy);
         menuEdit.add(editPaste);
         menuEdit.add(editSeparator1);
@@ -488,12 +514,5 @@ public class EditorWindow extends JFrame {
         this.textArea.setLineWrap(wrap);
 
     }
-
-
-
-
-
-
-
 
 }

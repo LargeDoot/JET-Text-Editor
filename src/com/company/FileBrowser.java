@@ -16,6 +16,7 @@ public class FileBrowser extends JFrame {
 
     public String getURI() {
 
+        //todo: remove test directory
         JFileChooser fileChooser = new JFileChooser("C:\\Users\\Ethan\\IdeaProjects\\JET-Text-Editor");
         fileChooser.setDialogTitle(title);
 
