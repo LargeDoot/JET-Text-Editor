@@ -54,6 +54,8 @@ public class fileSaveListener implements ActionListener {
     /**
      * A method to save files, where if no file location is provided, it will open a new file browser where the user can
      * choose a new location. If the user cancels the file browser operation, the file will not be saved.
+     *
+     * @param file the JETFile object to write to file
      */
     void saveFile(JETFile file) {
 

@@ -21,6 +21,12 @@ public class replaceButtonListener implements ActionListener {
 
     JTextArea textArea;
 
+    /**
+     * Constructor to create the listener.
+     *
+     * @param window the parent Editor Window
+     * @param dialog the dialog that the listener belongs to
+     */
     public replaceButtonListener(EditorWindow window, ReplaceDialog dialog) {
 
         this.window = window;
@@ -28,6 +34,12 @@ public class replaceButtonListener implements ActionListener {
 
     }
 
+    /**
+     * Replaces text that has been located using the find function. Once replaced, text will be re-highlighted to
+     * account for differences in length between origin and new strings
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

@@ -48,7 +48,6 @@ public class editCopyListener implements ActionListener {
             StringSelection stringSelection = new StringSelection(selectedText);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
-            System.err.println("Text copied!");
 
         } else {
             System.err.println("No text selected - cannot copy!");

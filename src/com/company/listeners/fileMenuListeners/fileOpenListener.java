@@ -14,12 +14,23 @@ public class fileOpenListener implements ActionListener {
 
     final EditorWindow window;
 
-    public fileOpenListener(EditorWindow editorWindow) {
+    /**
+     * Constructor to create the listener.
+     *
+     * @param window the parent Editor Window
+     */
+    public fileOpenListener(EditorWindow window) {
 
-        this.window = editorWindow;
+        this.window = window;
 
     }
 
+    /**
+     * Obtains a file location from a fieBrowser object, and uses the chosen address to open a file via a ReaderWriter
+     * object. It then sets the EditorWindow's title to match the files location, and sets the line number labels.
+     *
+     * @param actionEvent event
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
