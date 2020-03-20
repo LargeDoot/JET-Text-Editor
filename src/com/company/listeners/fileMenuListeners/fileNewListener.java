@@ -5,10 +5,16 @@ import com.company.EditorWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class fileNewListener implements ActionListener {
 
     /**
-     * A method to open a new EditorWindow
+     * A method to open a new EditorWindow.java
      *
      * @param actionEvent event
      */

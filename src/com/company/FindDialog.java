@@ -8,6 +8,15 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * The find dialog class contains the code for creating a find dialog, with find preferences, a search field and some
+ * buttons.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class FindDialog {
 
     final JDialog findReplace;
@@ -27,14 +36,11 @@ public class FindDialog {
     int[] currentFindSelection;
 
     /**
-     * Code for the find and replace dialog, containing:
-     * - a text field for the search query
-     * - a tick box for wrapping text
-     * - a tick box for case sensitivity
-     * - radio buttons for up/down search direction
-     * - 'search' and 'cancel' buttons
+     * Code for the find and replace dialog, containing: - a text field for the search query - a tick box for wrapping
+     * text - a tick box for case sensitivity - radio buttons for up/down search direction - 'search' and 'cancel'
+     * buttons
      *
-     * @param window a reference to the parent window (EditorWindow)
+     * @param window a reference to the parent window (EditorWindow.java)
      */
     public FindDialog(EditorWindow window) {
 
@@ -156,11 +162,6 @@ public class FindDialog {
 
     }
 
-    /**
-     * Getter
-     *
-     * @return the search box containing the text to be searched for
-     */
     public JTextField getSearchBox() {
 
         return (findTextField);

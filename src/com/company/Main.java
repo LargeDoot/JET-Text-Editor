@@ -1,9 +1,18 @@
 package com.company;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * The main class.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class Main {
 
     public static void main(String[] args) {
 
+        //Start the editor
         new EditorWindow().setVisible(true);
 
     }

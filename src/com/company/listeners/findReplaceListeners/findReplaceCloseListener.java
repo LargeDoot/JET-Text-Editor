@@ -5,6 +5,12 @@ import com.company.EditorWindow;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class findReplaceCloseListener implements WindowListener {
 
     final EditorWindow window;

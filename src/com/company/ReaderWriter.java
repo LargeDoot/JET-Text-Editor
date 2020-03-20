@@ -2,13 +2,26 @@ package com.company;
 
 import java.io.*;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * The readerWriter class is a multifunctional class that functions either as a reader or a writer, depending on
+ * which constructor is used. It is responsible for interfacing between JETFile objects and the file system.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class ReaderWriter {
 
     final String writeToURI;
     String writeToText;
     EditorWindow editorWindow;
 
-    //Writer constructor
+    /**
+     * The constructor for creating a writer.
+     *
+     * @param fileToWrite the JET File to write
+     */
     public ReaderWriter(JETFile fileToWrite) {
 
         writeToURI = fileToWrite.getFileLocation();
@@ -23,7 +36,12 @@ public class ReaderWriter {
 
     }
 
-    //Reader constructor
+    /**
+     * The constructor for creating a reader.
+     *
+     * @param pURI         URI to read from
+     * @param editorWindow parent window where the text will be placed once read
+     */
     public ReaderWriter(String pURI, EditorWindow editorWindow) {
 
         this.editorWindow = editorWindow;
@@ -39,7 +57,11 @@ public class ReaderWriter {
 
     }
 
-    //File writer
+    /**
+     * File writer which takes a URI, text and then writes the text to a file.
+     *
+     * @throws IOException when there is a problem reading the file
+     */
     private void writeFile() throws IOException {
 
         try {
@@ -59,7 +81,11 @@ public class ReaderWriter {
 
     }
 
-    //File reader
+    /**
+     * File reader which takes a URI and reads the file into a String variable.
+     *
+     * @throws IOException when there is a problem reading the file
+     */
     private void fileReader() throws IOException {
 
         String nextLine;
@@ -86,9 +112,6 @@ public class ReaderWriter {
         } catch (NullPointerException e) {
             System.err.println("User cancelled open operation.");
         }
-
-
-
 
     }
 

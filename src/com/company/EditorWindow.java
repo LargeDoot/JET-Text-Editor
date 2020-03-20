@@ -19,6 +19,15 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * The main editor window.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 @SuppressWarnings("DuplicatedCode")
 public class EditorWindow extends JFrame {
 
@@ -47,8 +56,34 @@ public class EditorWindow extends JFrame {
 
     JCheckBoxMenuItem formatWordWrap, viewToolbarToggle;
 
-    String[] fontList;
+    final String[] fontList;
 
+    /**
+     * Main code for the editor window. This window is where the main work area for the user is, containing: <br>
+     * <ul>
+     *     <li>a menu bar</li>
+     *     <li>a toolbar with small icons</li>
+     *     <li>a scrollable text area</li>
+     *     <li>a status bar</li>
+     * </ul>
+     * <p>
+     * The menu bar contains various menus that allow the user to make use of the many functions that JET has to
+     * offer, such as opening files, saving files, undoing changes, finding things, adjusting preferences and getting
+     * help.
+     * <p>
+     * The toolbar contains quick access to the common functions, and can be docked and moved around by the user. It
+     * (by default) contains buttons for: open, save, zoom in, zoom out and exit.
+     * <p>
+     * The text area is where the user can create and edit text files, and works as a normal text editor would.
+     * Shortcuts are available for all functions under the "File" and "Edit" menus, including undo and redo, making
+     * working on text files using JET much easier!
+     * <p>
+     * The status bar shows some information on the current status of the editor, including typeset (currently just a
+     * static label set to "UTF-8"), caret position (line and column) and zoom level.
+     * <p>
+     * The window also has keyboard navigation mnemonics set up so accessing the menu bar without a mouse is very
+     * easy, pressing the Alt key will show the available shortcuts.
+     */
     public EditorWindow() {
 
         super(" Jet Editor | 'Untitled.txt'");
@@ -455,6 +490,42 @@ public class EditorWindow extends JFrame {
 
     }
 
+    /**
+     * Sets the window's zoom level, and updates the zoom label in the status bar.
+     *
+     * @param zoomLevel the new zoom level
+     */
+    public void setZoomLevel(int zoomLevel) {
+
+        //Set the size of the font based upon the zoom level
+        this.zoomLevel = zoomLevel;
+        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
+
+        //Set label to the correct zoom level
+        String zoomLevelText = String.format(" %s%% ", (100 + zoomLevel));
+        zoomLevelLabel.setText(zoomLevelText);
+
+    }
+
+    public void setWindowFont(Font windowFont) {
+
+        //Set the window font, set the text area font to the new one, and update the fontSize
+        this.windowFont = windowFont;
+        this.textArea.setFont(windowFont);
+        this.fontSize = windowFont.getSize() - zoomLevel;
+    }
+
+    public void setFile(JETFile file) {
+        currentFile = file;
+        textArea.setText(file.getTextContents());
+    }
+
+    public void setTextWrap(Boolean wrap) {
+
+        this.textArea.setLineWrap(wrap);
+
+    }
+
     //Setters and getters
     public String getText() {
         return textArea.getText();
@@ -470,14 +541,6 @@ public class EditorWindow extends JFrame {
 
     public Font getWindowFont() {
         return windowFont;
-    }
-
-    public void setWindowFont(Font windowFont) {
-
-        //Set the window font, set the text area font to the new one, and update the fontSize
-        this.windowFont = windowFont;
-        this.textArea.setFont(windowFont);
-        this.fontSize = windowFont.getSize() - zoomLevel;
     }
 
     public JLabel getLineColumn() {
@@ -504,27 +567,5 @@ public class EditorWindow extends JFrame {
         return fontList;
     }
 
-    public void setZoomLevel(int zoomLevel) {
-
-        //Set the size of the font based upon the zoom level
-        this.zoomLevel = zoomLevel;
-        setWindowFont(new Font(windowFont.getFontName(), Font.PLAIN, (fontSize + this.zoomLevel)));
-
-        //Set label to the correct zoom level
-        String zoomLevelText = String.format(" %s%% ", (100 + zoomLevel));
-        zoomLevelLabel.setText(zoomLevelText);
-
-    }
-
-    public void setFile(JETFile file) {
-        currentFile = file;
-        textArea.setText(file.getTextContents());
-    }
-
-    public void setTextWrap(Boolean wrap) {
-
-        this.textArea.setLineWrap(wrap);
-
-    }
 
 }

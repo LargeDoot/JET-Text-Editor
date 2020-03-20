@@ -6,6 +6,12 @@ import com.company.preferences.PreferencesDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class formatFontListener implements ActionListener {
 
     final EditorWindow window;
@@ -24,7 +30,7 @@ public class formatFontListener implements ActionListener {
     /**
      * Opens a new preferences dialog
      *
-     * @param actionEvent
+     * @param actionEvent event
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

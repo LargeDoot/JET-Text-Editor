@@ -6,6 +6,12 @@ import com.company.SaveDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class fileExitListener implements ActionListener {
 
     final EditorWindow window;

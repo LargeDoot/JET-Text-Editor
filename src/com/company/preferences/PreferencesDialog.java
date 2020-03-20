@@ -9,6 +9,14 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * This class contains all the code for creating a preferences dialog.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class PreferencesDialog {
 
     final JDialog prefs;
@@ -25,6 +33,11 @@ public class PreferencesDialog {
 
     private final DefaultComboBoxModel<String> styleModel;
 
+    /**
+     * Code for creating the preferences dialog, which contains options for font size and style.
+     *
+     * @param window the parent editor window
+     */
     public PreferencesDialog(EditorWindow window) {
 
         prefs = new JDialog(window, true);
@@ -42,7 +55,7 @@ public class PreferencesDialog {
         prefs.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         //Add a border around the window so that components never touch the edge
-        container.setBorder( new EmptyBorder(10, 10, 10, 10) );
+        container.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         //Add font size spinner components
         fontSize = new JLabel("Font size");
@@ -100,6 +113,7 @@ public class PreferencesDialog {
 
     }
 
+    //returns the current styleModel
     public DefaultComboBoxModel<String> getDefaultComboBoxModel() {
         return styleModel;
 

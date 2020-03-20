@@ -4,11 +4,19 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class helpListener implements ActionListener {
 
-    public helpListener() {
-    }
-
+    /**
+     * Display a new help dialog
+     *
+     * @param actionEvent event
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 

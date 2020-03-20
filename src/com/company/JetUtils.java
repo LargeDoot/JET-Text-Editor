@@ -3,8 +3,21 @@ package com.company;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * Utility class for JET. Used to reduce repeated code.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class JetUtils {
 
+    /**
+     * Set the line and column labels to the correct location of the carat (in the text area).
+     *
+     * @param window parent window used to get the labels
+     */
     public static void setLineNumbers(EditorWindow window) {
 
         JTextArea textArea = window.getTextArea();

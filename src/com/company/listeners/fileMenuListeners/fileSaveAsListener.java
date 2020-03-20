@@ -7,6 +7,12 @@ import com.company.ReaderWriter;
 
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class fileSaveAsListener extends fileSaveListener implements ActionListener {
 
     /**
@@ -19,12 +25,12 @@ public class fileSaveAsListener extends fileSaveListener implements ActionListen
     }
 
     /**
-     * Obtains a file location via a FileBrowser object, and puts the chosen location into the current JETFile as long
-     * as the user did not cancel the FileBrowser. If the user did pick a location, the text from the Editor Window's is
-     * saved to the KJETFile object, the file is written, and the window title is updated to reflect the file location
-     * change.
+     * Obtains a file location via a FileBrowser.java object, and puts the chosen location into the current JETFile as
+     * long as the user did not cancel the FileBrowser.java. If the user did pick a location, the text from the Editor
+     * Window's is saved to the KJETFile object, the file is written, and the window title is updated to reflect the
+     * file location change.
      *
-     * @param file
+     * @param file The JETFile that will be written to
      */
     @Override
     void saveFile(JETFile file) {

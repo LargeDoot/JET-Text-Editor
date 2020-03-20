@@ -4,6 +4,14 @@ import com.company.listeners.findReplaceListeners.replaceButtonListener;
 
 import javax.swing.*;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * An extension of the find dialog, with an extra text field where a user can type a replace string.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class ReplaceDialog extends FindDialog {
 
     final JPanel replaceBoxContainer;
@@ -11,6 +19,11 @@ public class ReplaceDialog extends FindDialog {
     final JTextField replaceBox;
     final JButton replaceButton;
 
+    /**
+     * Constructor for creating the dialog.
+     *
+     * @param window parent editor window
+     */
     public ReplaceDialog(EditorWindow window) {
         super(window);
 

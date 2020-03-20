@@ -13,6 +13,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class findButtonListener implements ActionListener {
 
     final EditorWindow window;
@@ -55,11 +61,11 @@ public class findButtonListener implements ActionListener {
     }
 
     /**
-     * Search feature that will locate a string in a Document object. It takes into accound some preferences in the find
+     * Search feature that will locate a string in a Document object. It takes into account some preferences in the find
      * dialog, such as case sensitivity and direction of search. If the term being searched for is found, then it is
      * highlighted yellow. Each new search will remove the previous highlighting.
      * <p>
-     * If the term is not found, or the search reaches the end of the document, then a dialog is sbown stating just
+     * If the term is not found, or the search reaches the end of the document, then a dialog is shown stating just
      * that!
      *
      * @param e event

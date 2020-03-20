@@ -5,11 +5,15 @@ import com.company.FileBrowser;
 import com.company.JetUtils;
 import com.company.ReaderWriter;
 
-import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class fileOpenListener implements ActionListener {
 
     final EditorWindow window;
@@ -27,7 +31,7 @@ public class fileOpenListener implements ActionListener {
 
     /**
      * Obtains a file location from a fieBrowser object, and uses the chosen address to open a file via a ReaderWriter
-     * object. It then sets the EditorWindow's title to match the files location, and sets the line number labels.
+     * object. It then sets the EditorWindow.java's title to match the files location, and sets the line number labels.
      *
      * @param actionEvent event
      */

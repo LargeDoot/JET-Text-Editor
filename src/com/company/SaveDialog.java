@@ -8,6 +8,15 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * The save dialog class contains the code to create a dialog that prompts the user to save any unsaved changes
+ * before exiting JET.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class SaveDialog {
 
     final JDialog checkSave;
@@ -17,6 +26,11 @@ public class SaveDialog {
     final JButton dontSaveButton;
     final JButton cancelButton;
 
+    /**
+     * Creates a save dialog, used when the user tries to close an editor window and there are unsaved changes.
+     *
+     * @param window parent editor window
+     */
     public SaveDialog(EditorWindow window) {
 
         checkSave = new JDialog(window, true);

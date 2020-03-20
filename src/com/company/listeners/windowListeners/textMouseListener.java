@@ -1,69 +1,62 @@
 package com.company.listeners.windowListeners;
 
 import com.company.EditorWindow;
+import com.company.JetUtils;
 
-import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/*******************************************************************************
+ * Copyright (c) Ethan Wilson 2020.
+ *
+ * @author Ethan Wilson
+ * @since 13-02-2020
+ ******************************************************************************/
 public class textMouseListener implements MouseListener {
 
     final EditorWindow window;
 
+    /**
+     * Constructor to create the listener.
+     *
+     * @param window the parent Editor Window
+     */
     public textMouseListener(EditorWindow window) {
 
         this.window = window;
 
     }
 
+    /**
+     * Listener for mouse clicks inside of the text area, used for updating the Ln and Cl labels in the status bar of
+     * the editor window. Uses a jet utils static method for doing this.
+     *
+     * @param e mouse click event
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        JTextArea textArea = window.getTextArea();
-
-        //Variables for determining location
-        int caretPos = textArea.getCaretPosition();
-        int lineNum = 0, lineColumn = 0;
-
-        //Get row and column numbers from the caretPos
-        try {
-            lineNum = textArea.getLineOfOffset(caretPos);
-            lineColumn = caretPos - textArea.getLineStartOffset(lineNum);
-        } catch (BadLocationException ignored) {
-
-            System.err.println("Bad Location @ textKeyListener " + caretPos);
-        }
-
-        //Create strings to insert into the labels
-        String lineNumString, lineColumnString;
-
-        lineNumString = String.format(" Ln: %d \t ", lineNum + 1);
-        lineColumnString = String.format("Col: %d ", lineColumn + 1);
-
-        //Set the label text
-        window.getLineNum().setText(lineNumString);
-        window.getLineColumn().setText(lineColumnString);
+        JetUtils.setLineNumbers(window);
 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        //Unused
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        //Unused
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        //Unused
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        //Unused
     }
 }
