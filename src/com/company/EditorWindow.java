@@ -47,6 +47,8 @@ public class EditorWindow extends JFrame {
 
     JCheckBoxMenuItem formatWordWrap, viewToolbarToggle;
 
+    String[] fontList;
+
     public EditorWindow() {
 
         super(" Jet Editor | 'Untitled.txt'");
@@ -152,6 +154,11 @@ public class EditorWindow extends JFrame {
 
         //Make the window open in the center of the screen (not the top left)
         setLocationRelativeTo(null);
+
+        //Generate a list of fonts from the OS, it is generated here so that it only has to run once (it is
+        // performance heavy and adds a delay if generating when opening the font dialog)
+        fontList = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+
     }
 
     /**
@@ -491,6 +498,10 @@ public class EditorWindow extends JFrame {
 
     public int getZoomLevel() {
         return zoomLevel;
+    }
+
+    public String[] getFontList() {
+        return fontList;
     }
 
     public void setZoomLevel(int zoomLevel) {

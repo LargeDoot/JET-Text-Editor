@@ -60,7 +60,8 @@ public class PreferencesDialog {
         fontLabel = new JLabel("Font Selector");
         container.add(fontLabel);
 
-        fontList = new JComboBox<>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+        //Get the font list from the window
+        fontList = new JComboBox<>(window.getFontList());
         fontList.addItemListener(new prefsFontListener(this));
         container.add(fontList);
 
@@ -93,26 +94,15 @@ public class PreferencesDialog {
         fontList.setSelectedItem(initialFontFamily);
         fontStyleList.setSelectedItem(initialFont);
 
-        //Align the font size with the actual preferences
-//        fontSizeSelector.setModel();
-
         //Add the container to the dialog and make it visible
         prefs.add(container);
         prefs.setVisible(true);
 
-
     }
 
     public DefaultComboBoxModel<String> getDefaultComboBoxModel() {
-
         return styleModel;
-    }
 
-// --Commented out by Inspection START (12/03/2020 10:05):
-//    public JComboBox<String> getStyleComboBox() {
-//
-//        return fontStyleList;
-//    }
-// --Commented out by Inspection STOP (12/03/2020 10:05)
+    }
 
 }

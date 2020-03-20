@@ -10,12 +10,22 @@ public class formatFontListener implements ActionListener {
 
     final EditorWindow window;
 
+    /**
+     * Constructor to create the listener.
+     *
+     * @param window the parent Editor Window
+     */
     public formatFontListener(EditorWindow window) {
 
         this.window = window;
 
     }
 
+    /**
+     * Opens a new preferences dialog
+     *
+     * @param actionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
